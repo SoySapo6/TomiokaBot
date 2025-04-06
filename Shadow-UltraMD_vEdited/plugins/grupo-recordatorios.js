@@ -1,0 +1,50 @@
+let recordatorios = {};
+
+async function handler(m, { args, command, isAdmin }) {
+    if (!isAdmin) return m.reply('Solo los administradores pueden usar este comando.');
+
+    if (command === 'recordatorio') {
+        if (args.length < 2) return m.reply('Uso: *!recordatorio [minutos] [mensaje]*');
+
+        let tiempo = parseInt(args[0]);
+        if (isNaN(tiempo) || tiempo <= 0) return m.reply('El tiempo debe ser un número válido en minutos.');
+
+        let mensaje = args.slice(1).join(' ');
+        let chatId = m.chat;
+
+        if (recordatorios[chatId]) clearTimeout(recordatorios[chatId].timeout);
+
+        let contador = 0;
+        function enviarRecordatorio() {
+            if (contador < 2) {
+                conn.sendMessage(chatId, { text: `*_🌱 Recordatorio:_*\n\n ${mensaje}` });
+                contador++;
+                recordatorios[chatId].timeout = setTimeout(enviarRecordatorio, tiempo * 60000);
+            } else {
+                delete recordatorios[chatId];
+            }
+        }
+
+        recordatorios[chatId] = { timeout: setTimeout(enviarRecordatorio, tiempo * 60000) };
+        m.reply(`✅ Recordatorio activado: *"${mensaje}"* cada ${tiempo} minuto(s), se enviará 2 veces :D`);
+    }
+
+    if (command === 'cancelarrecordatorio') {
+        let chatId = m.chat;
+        if (recordatorios[chatId]) {
+            clearTimeout(recordatorios[chatId].timeout);
+            delete recordatorios[chatId];
+            m.reply('❌ Recordatorio cancelado.');
+        } else {
+            m.reply('No hay recordatorios activos en este grupo.');
+        }
+    }
+}
+
+handler.help = ['recordatorio', 'cancelarrecordatorio'];
+handler.tags = ['grupo'];
+handler.command = ['recordatorio', 'cancelarrecordatorio'];
+handler.admin = true;
+handler.group = true;
+
+export default handler;
