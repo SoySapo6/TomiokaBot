@@ -1,5 +1,5 @@
 entrypoint = "main.sh"
-modules = ["bash"]
+modules = ["bash", "nodejs-23"]
 
 [nix]
 channel = "stable-24_05"
@@ -7,3 +7,14 @@ channel = "stable-24_05"
 [deployment]
 run = ["bash", "main.sh"]
 deploymentTarget = "cloudrun"
+
+[workflows]
+
+[[workflows.workflow]]
+name = "Start"
+mode = "sequential"
+author = 41215712
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd GataBot-MD && npm start"
