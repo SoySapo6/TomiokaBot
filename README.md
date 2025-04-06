@@ -4,6 +4,11 @@
 
 ![MaycolAI](https://i.postimg.cc/qqqGT9rm/1-sin-t-tulo-20250323184615.png)
 
+<p align="center">
+<a href="#"><img title="GataBot-MD" src="https://img.shields.io/badge/Deja tu ⭐ Para darme motivos de Seguir ^^ -red?colorA=%255ff0000&colorB=%23017e40&style=for-the-badge"></a> 
+<img src="https://i.postimg.cc/W1P24C13/descarga-24.jpg" height="28px">
+</p>  
+
 🌟 ¡Bienvenido a **MaycolAI**! 🌟  
 Este bot de WhatsApp, basado en **Baileys**, está cargado de funciones impresionantes, simuladores locos y un montón de comandos útiles. 😎
 
