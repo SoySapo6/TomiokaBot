@@ -24,10 +24,21 @@ Este bot de WhatsApp, basado en **Baileys**, está cargado de funciones impresio
 - Y mucho más...
 
 ---
+# Youtube 📽️
+<p>Todos los canales y videos del bot!</p>
 
 <h1 align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&pause=5&color=00F7FF&center=true&vCenter=true&width=650&lines=Maycol+AI+Ultra" alt="Typing SVG">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&pause=5&color=00F7FF&center=true&vCenter=true&width=650&lines=Canales+de+Youtube+🔥🔥" alt="Typing SVG">
 </h1>
+
+[![blog](https://img.shields.io/badge/RAP-GataBot_VS_MaycolAI-FF0000?style=for-the-badge&logo=youtube&logoColor=white)
+](https://youtu.be/HFNhMzYmA5Y?si=SUWcBEY1u3JUMyN1)
+
+[![blog](https://img.shields.io/badge/Primer_Canal-SoyMaycol-FF0000?style=for-the-badge&logo=youtube&logoColor=white)
+](https://www.youtube.com/@Palito-100)
+
+[![blog](https://img.shields.io/badge/Segundo_Canal-SoyMaycol-FF0000?style=for-the-badge&logo=youtube&logoColor=white)
+](https://www.youtube.com/@Palito-200)
 
 ---
 
