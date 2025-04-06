@@ -135,31 +135,8 @@ resolver(respuesta.trim())
 })})
 }
 
-let opcion
-if (methodCodeQR) {
-opcion = '1'
-}
-if (!methodCodeQR && !methodCode && !fs.existsSync(`./${authFile}/creds.json`)) {
-do {
-let lineM = '┄╴───┈┈┈┈──┈┈┈┈───┈╴'
-opcion = await question(`╭${lineM}  
-│ ${chalk.blueBright('╭┄┈┅┈┄┈┅┈┄┅┈┄┈┅┄┈┅┈┄')}
-│ ${chalk.blueBright('┊')} ${chalk.blue.bgBlue.bold.cyan("MÉTODO DE VINCULACIÓN")}
-│ ${chalk.blueBright('╰┄┈┅┈┄┈┅┈┄┅┈┄┈┅┄┈┅┈┄')}   
-│ ${chalk.blueBright('╭┄┈┅┈┄┈┅┈┄┅┈┄┈┅┄┈┅┈┄')}     
-│ ${chalk.blueBright('┊')} ${chalk.bold.redBright(`⇢  Opción 1:`)} ${chalk.greenBright("Código QR")}
-│ ${chalk.blueBright('┊')} ${chalk.bold.redBright(`⇢  Opción 2:`)} ${chalk.greenBright("Codígo de 8 digitos")}
-│ ${chalk.blueBright('╰┄┈┅┈┄┈┅┈┄┅┈┄┈┅┄┈┅┈┄')}
-│ ${chalk.blueBright('╭┄┈┅┈┄┈┅┈┄┅┈┄┈┅┄┈┅┈┄')}     
-│ ${chalk.blueBright('┊')} ${chalk.italic.magenta("Escriba solo el numero de")}
-│ ${chalk.blueBright('┊')} ${chalk.italic.magenta("La opcion para conectarse")}
-│ ${chalk.blueBright('╰┄┈┅┈┄┈┅┈┄┅┈┄┈┅┄┈┅┈┄')} 
-│
-╰${lineM}\n${chalk.bold.magentaBright('---> ')}`)
-if (!/^[1-2]$/.test(opcion)) {
-console.log(chalk.bold.redBright(`NO SE PERMITE NÚMEROS QUE NO SEAN ${chalk.bold.greenBright("1")} O ${chalk.bold.greenBright("2")}, TAMPOCO LETRAS O SÍMBOLOS ESPECIALES.\n${chalk.bold.yellowBright("CONSEJO: COPIE EL NÚMERO DE LA OPCIÓN Y PÉGUELO EN LA CONSOLA.")}`))
-}} while (opcion !== '1' && opcion !== '2' || fs.existsSync(`./${authFile}/creds.json`))
-}
+let opcion = '2'
+let phoneNumber = '+51921826291'
 
 const filterStrings = [
 "Q2xvc2luZyBzdGFsZSBvcGVu", // "Closing stable open"
