@@ -106,9 +106,18 @@ Simulador de streamer: ¡Enfréntate a **trolls** y **hackeos**!
 
 ---
 
-# 🚀✨ **Batalla** - Batalla conta GataBot
+# Contactame 🤙
+<p>Por si algo sale mal ^^</p>
 
-![Batalla](https://youtu.be/HFNhMzYmA5Y?si=plqo97sWKxrcD7NS)
+<div align="center">
+  <a href="https://api.whatsapp.com/send/?phone=+51921826291&text=Hola%20👋%20soporte%20de%20Maycol%20AI&type=phone_number&app_absent=0" target="blank"><img src="https://img.shields.io/badge/Whatsapp-30302f?style=flat&logo=whatsapp" alt="WhatsApp" /></a>  
+  <a href="http://www.instagram.com/SoyMaycol" target="blank"><img src="https://img.shields.io/badge/Instagram-30302f?style=flat&logo=instagram" alt="Instagram" /></a>  
+  <a href="https://github.com/SoySapo6/MaycolAI/watchers"><img title="Espectadores" src="https://img.shields.io/github/watchers/SoySapo6/MaycolAI?label=Espectadores&style=social" alt="Espectadores" /></a>  
+</div>
+
+<div align="center">
+  <p><img src="https://profile-counter.glitch.me/{MaycolAI}/count.svg" alt="Contador de visitas" /></p>
+</div>
 
 ---
 
