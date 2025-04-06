@@ -52,15 +52,15 @@ const { roleplay } = require("./services/roleplay.js");
 const rolePlayAI = require("./services/characterai.js");
 const { exec } = require("child_process");
 const client = require('./connection.js');
-const { chatb } = require("/storage/emulated/0/Gatito-mi-bot/services/beast.js");
-const { chatm } = require("/storage/emulated/0/Gatito-mi-bot/services/mia.js");
+const { chatb } = require("./services/beast.js");
+const { chatm } = require("./services/mia.js");
  const { ejecutarCodigo } = require("./services/glot");
  const { buscarEnGoogle } = require("./services/googleSearch.js");
 const { getTenorGif } = require("./services/tenor");
 const fs = require('fs');
 const { descargarVideo } = require("./services/Youtubedescarga");
 const { buscarEnYoutube } = require("./services/Youtube");
-const { chat } = require("/storage/emulated/0/Gatito-mi-bot/services/Gemini.js");
+const { chat } = require("./services/Gemini.js");
 const path = require("node:path");
 const { ASSETS_DIR, BOT_NUMBER, SPIDER_API_TOKEN, API_darkstartsz, NAME_darkstartsz } = require("./config");
 const { errorLog } = require("./utils/terminal");
@@ -330,7 +330,7 @@ case "qrsticker":
         await socket.sendMessage(from, { text: "📌 *Uso correcto:* qr (contenido) / qrsticker (contenido)" });
         break;
     }
-    
+
     const qrText = args.join(" ");
     const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(qrText)}`;
     const fileName = `./stickers/qr_${Date.now()}.png`;
@@ -413,7 +413,7 @@ case "qrsticker":
         }
 
         await successReply(`*Resultado*
-        
+
 *CEP*: ${data.cep}
 *Logradouro*: ${data.logradouro}
 *Complemento*: ${data.complemento}
@@ -538,7 +538,7 @@ case "lite":
 case "perro":
   await react("🐶");
   await reply("Obteniendo una foto de un perro...");
-  
+
   try {
     // Realizamos la petición a la URL de la API
     const response = await axios.get('https://9d8bf1c7-058e-43a6-9ddf-f49848225e45-00-fx4xgpqmoyrg.spock.repl.co/', {
@@ -871,9 +871,9 @@ case 'audios':
     case "tts":
     await waitReply("Generando TTS, Espere ^^");
   if (!args.length) return reply("Uso: tts <texto>");
-  
+
   let ttsPath = await obtenerTTS(args.join(" "));
-  
+
   if (ttsPath) {
     await socket.sendMessage(from, { audio: { url: ttsPath }, mimetype: "audio/mp4" });
     fs.unlinkSync(ttsPath); // Elimina el archivo para ahorrar espacio
@@ -923,7 +923,7 @@ case "miaai":
     await successReply(responseText);
   } catch (error) {
     await errorReply("Hubo un error al obtener la respuesta de Gemini 🤖");
-    console.error(error);
+    console.errorerror);
   }
   break;
   case "beastai":
@@ -958,7 +958,7 @@ case "miaai":
         await waitReact("🕘");
         await stickerFromInfo(info);
         break;
-        
+
       case "welcome":
       case "bemvindo":
       case "boasvinda":
@@ -1041,12 +1041,12 @@ case "reg":
       Bienvenido a la Familia!
      Hey ${nombre}, Te Quiero <3
 
-Usᴀ !ᴍᴇɴú ᴘᴀʀᴀ ᴠᴇʀ ᴇʟ ᴍᴇɴᴜ`,
+Usᴀ !ᴍᴇɴᴜ ᴘᴀʀᴀ ᴠᴇʀ ᴇʟ ᴍᴇɴᴜ`,
       contextInfo: adReplyReg.contextInfo // Adjuntamos el AdReply aquí
     });
   }
   break;
-  
+
   case "raro":
     const porcentaje = Math.floor(Math.random() * 101); // Genera un porcentaje aleatorio entre 0 y 100
     let respuestararo;
