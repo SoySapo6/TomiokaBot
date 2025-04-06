@@ -74,49 +74,25 @@ Simulador de streamer: ¡Enfréntate a **trolls** y **hackeos**!
 ### 🔧 **Pasos de instalación**:
 
 1. **Configura el almacenamiento**:
+
    
+```
    termux-setup-storage
+```
 
 2. Instala las dependencias necesarias:
 
+```
     pkg upgrade -y && pkg update -y && pkg install git -y && pkg install nodejs-lts -y && pkg install ffmpeg -y && npm install -g yarn && pkg install python-pip && pip install yt-dlp
+```
 
 3. Clona el repositorio:
 
-   mkdir /sdcard/Gatito-mi-bot && cd /sdcard/Gatito-mi-bot && git clone https://github.com/SoySapo6/MaycolAI && npm install gemini-chatbot
 
-4. Abre tu gestor de archivos
-
-5. Ahora todos los archivos adentro de Gatito-mi-bot/MaycolAI/ muevelos a Gatito-mi-bot/ y elimina MaycolAI
-
-6. Vuelve al terminal y ejecuta npm start
-
-8. ¡Listo! Ahora solo toca vincular y listo!
-
----
-
-# **AndroidTV** - Metodo para AndroidTV
-
-### 🔧 **Pasos de instalación**:
-
-1. **Configura el almacenamiento**:
-   
-   termux-setup-storage
-
-2. Instala las dependencias necesarias:
-
-    pkg upgrade -y && pkg update -y && pkg install git -y && pkg install nodejs-lts -y && pkg install ffmpeg -y && npm install -g yarn && pkg install python-pip && pip install yt-dlp
-
-3. Clona el repositorio:
-
-   mkdir ~/Gatito-mi-bot && cd ~/
-   /sdcard/Gatito-mi-bot && git clone https://github.com/SoySapo6/MaycolAI
-
-4. npm start
-
-5. ¡Listo! Ahora solo toca vincular y listo!
-
-Nota:Puede que falle algunos comanzos, Si tu televisor permite que termux acceda a las carpetas usa el Primer Metodo
+```
+   cd /sdcard/ && git clone https://github.com/SoySapo6/MaycolAI && cd MaycolAI && npm install gemini-chatbot
+```
+4. Listo!
 
 ---
 
