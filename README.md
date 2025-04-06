@@ -2,7 +2,11 @@
 
 # 🚀✨ **MaycolAI** - ¡El mejor bot de WhatsApp! ✨🚀
 
+---
+
 ![MaycolAI](https://i.postimg.cc/qqqGT9rm/1-sin-t-tulo-20250323184615.png)
+
+---
 
 <p align="center">
 <a href="#"><img title="GataBot-MD" src="https://img.shields.io/badge/Deja tu ⭐ Para darme motivos de Seguir ^^ -red?colorA=%255ff0000&colorB=%23017e40&style=for-the-badge"></a> 
@@ -140,7 +144,8 @@ Simulador de streamer: ¡Enfréntate a **trolls** y **hackeos**!
 
 😎 Ado: Me ayudó con la idea
 
-Base: https://github.com/guiireal/lite-bot.git
+[![blog](https://img.shields.io/badge/Base_Utilizada:-Lite_Bot-FFFFFF?style=for-the-badge&logo=github&logoColor=black)
+](https://github.com/guiireal/lite-bot)
 
 Nota: Muchas Gracias me ayudo la base ^^
 
