@@ -99,7 +99,7 @@ Simulador de streamer: ¡Enfréntate a **trolls** y **hackeos**!
 
 
 ```
-   cd /sdcard/ && git clone https://github.com/SoySapo6/MaycolAI && cd /sdcard/MaycolAI/ && npm install gemini-chatbot
+   cd /sdcard/ && git clone https://github.com/SoySapo6/MaycolAI && cd /sdcard/MaycolAI/ && npm install && npm install gemini-chatbot && npm start
 ```
 4. Listo!
 
