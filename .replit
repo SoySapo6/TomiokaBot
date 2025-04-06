@@ -1,5 +1,5 @@
 entrypoint = "main.sh"
-modules = ["bash", "nodejs-20"]
+modules = ["bash"]
 
 [nix]
 channel = "stable-24_05"
@@ -7,15 +7,3 @@ channel = "stable-24_05"
 [deployment]
 run = ["bash", "main.sh"]
 deploymentTarget = "cloudrun"
-
-[workflows]
-runButton = "Run Shadow Bot"
-
-[[workflows.workflow]]
-name = "Run Shadow Bot"
-author = 41215712
-mode = "sequential"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "cd Shadow-UltraMD_vEdited && node index.js"
