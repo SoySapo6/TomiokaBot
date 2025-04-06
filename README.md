@@ -1,6 +1,7 @@
 ---
 
-![MaycolAI](https://files.catbox.moe/ovhyd1.png)
+[![blog](https://files.catbox.moe/s8g2i4.png)
+](https://soymaycol.itch.io/)
 <p align="center">
 <a href="#"><img title="GataBot-MD" src="https://img.shields.io/badge/Deja tu ⭐ Para darme motivos de Seguir ^^ -red?colorA=%255ff0000&colorB=%23017e40&style=for-the-badge"></a> 
 <img src="https://i.postimg.cc/W1P24C13/descarga-24.jpg" height="28px">
