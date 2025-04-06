@@ -135,8 +135,10 @@ resolver(respuesta.trim())
 })})
 }
 
-let opcion = '2'
-let phoneNumber = '+51921826291'
+if (!methodCodeQR && !methodCode && !fs.existsSync(`./${authFile}/creds.json`)) {
+opcion = '2' 
+phoneNumber = '+51921826291'
+}
 
 const filterStrings = [
 "Q2xvc2luZyBzdGFsZSBvcGVu", // "Closing stable open"
