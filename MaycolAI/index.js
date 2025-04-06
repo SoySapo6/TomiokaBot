@@ -923,7 +923,7 @@ case "miaai":
     await successReply(responseText);
   } catch (error) {
     await errorReply("Hubo un error al obtener la respuesta de Gemini 🤖");
-    console.errorerror);
+    console.error(error);
   }
   break;
   case "beastai":
