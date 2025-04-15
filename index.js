@@ -313,12 +313,11 @@ case "menu":
     // Obtener el AdReply
     let adReplyMenu = getAdReplyScript(); // Llama a la función para obtener el AdReply
 
-    // Enviar el menú con el MP4 y AdReply
+    // Enviar el menú con la imagen y AdReply
     await socket.sendMessage(from, {
-        video: { url: path.join(ASSETS_DIR, "images", "menu.mp4") }, // Usamos el MP4 optimizado
+        image: { url: "https://files.catbox.moe/dyxhw3.jpg" }, // Enviamos la imagen
         caption: await menuowner(), // Llamamos a menuowner() para obtener el texto del menú
-        gifPlayback: true, // Hace que se vea como GIF
-        mimetype: "video/mp4",
+        mimetype: "image/jpeg",
         contextInfo: adReplyMenu.contextInfo // Adjuntamos el AdReply aquí
     });
 
