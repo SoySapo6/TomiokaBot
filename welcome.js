@@ -39,7 +39,7 @@ async function welcome({ socket: lite, data }) {
 
       await lite.sendMessage(from, {
         image: buffer,
-        caption: `Hola! @${número} 💃
+        caption: `Hola! @${numero} 💃
 Bienvenido a este Bot 🤪
 
 •Que? Que tiene este Bot? 👀
