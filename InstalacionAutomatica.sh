@@ -12,8 +12,9 @@ function print_ascii() {
 # Emojis de Hanako-kun
 EMOJI="️✨️☁️️"
 
-print_ascii "MaycolAI Installer"
-echo "Hecho Por SoyMaycol"
+print_ascii "MaycolAI"
+echo "Ajusta la Escala de La Pantalla"
+echo "Hecho por SoyMaycol"
 sleep 2
 
 # Actualización
@@ -41,7 +42,8 @@ npm install
 npm install gemini-chatbot
 
 # Eliminando baileys si existe
-print_ascii "Limpiando"
+print_ascii "Borrando Sessiones"
+echo "Menos errorres"
 rm -rf baileys
 
 # Mensaje final
