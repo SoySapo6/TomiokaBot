@@ -13,25 +13,25 @@ async function welcome({ socket: lite, data }) {
 
   if (data.action === "add") {
     try {
-      const numero = onlyNumbers(userJid); // Extraer el número del usuario
+      const numero = onlyNumbers(userJid);
       const waUrl = `https://wa.me/${numero}`;
 
-      // Obtener la imagen de perfil del número vía Microlink
-      const microlinkResponse = await axios.get(`https://api.microlink.io/?url=${waUrl}`);
-      const avatarUrl = microlinkResponse.data?.data?.image?.url;
+      // Llamada a microlink para obtener la imagen de perfil
+      const microlinkRes = await axios.get(`https://api.microlink.io/?url=${waUrl}`);
+      const avatarUrl = microlinkRes.data?.data?.image?.url;
 
-      // Verificación por si no devuelve imagen
       if (!avatarUrl) {
-        throw new Error("No se pudo obtener la imagen del perfil.");
+        throw new Error("No se pudo obtener la imagen del perfil de WhatsApp.");
       }
 
-      // Crear la URL final de Popcat con la imagen obtenida
-      const popcatUrl = `https://api.popcat.xyz/welcomecard?background=https://cdn.popcat.xyz/welcome-bg.png&text1=Zero%20Two&text2=Welcome+To+Pop+Cat+Community&text3=Member+${numero}&avatar=${encodeURIComponent(avatarUrl)}`;
+      // Crear el link personalizado para Popcat con imagen directa
+      const popcatUrl = `https://api.popcat.xyz/welcomecard?background=https://cdn.popcat.xyz/welcome-bg.png&text1=MaycolAI&text2=De+Parte+de+SoyMaycol+^^&text3=Member+${numero}&avatar=${encodeURIComponent(avatarUrl)}`;
 
+      // Descargar la imagen generada
       const response = await axios.get(popcatUrl, { responseType: "arraybuffer" });
       const buffer = Buffer.from(response.data, "binary");
 
-      // Enviar la imagen de bienvenida con el mensaje personalizado
+      // Enviar al grupo
       await lite.sendMessage(from, {
         image: buffer,
         caption: `Hola @${numero} ¡Bienvenido al grupo!  
