@@ -7,31 +7,36 @@ async function welcome({ socket: lite, data }) {
   const from = data.id;
   const userJid = data.participants[0];
 
-  if (!isActiveWelcomeGroup(from)) {
-    return;
-  }
+  if (!isActiveWelcomeGroup(from)) return;
 
   if (data.action === "add") {
     try {
       const numero = onlyNumbers(userJid);
-      const waUrl = `https://wa.me/${numero}`;
 
-      // Llamada a microlink para obtener la imagen de perfil
-      const microlinkRes = await axios.get(`https://api.microlink.io/?url=${waUrl}`);
-      const avatarUrl = microlinkRes.data?.data?.image?.url;
-
-      if (!avatarUrl) {
-        throw new Error("No se pudo obtener la imagen del perfil de WhatsApp.");
+      // Obtener la foto real de perfil usando Baileys
+      let avatarUrl;
+      try {
+        avatarUrl = await lite.profilePictureUrl(userJid, "image");
+      } catch {
+        // En caso no tenga foto, usa una genérica
+        avatarUrl = "https://files.catbox.moe/s1ouub.jpeg";
       }
 
-      // Crear el link personalizado para Popcat con imagen directa
-      const popcatUrl = `https://api.popcat.xyz/welcomecard?background=https://cdn.popcat.xyz/welcome-bg.png&text1=MaycolAI&text2=De+Parte+de+SoyMaycol+^^&text3=Member+${numero}&avatar=${encodeURIComponent(avatarUrl)}`;
+      // Personalizar texto del banner
+      const text1 = "MaycolAI";
+      const text2 = "De Parte de SoyMaycol ^^";
+      const text3 = `Member ${numero}`;
 
-      // Descargar la imagen generada
-      const response = await axios.get(popcatUrl, { responseType: "arraybuffer" });
+      // Crear URL de Popcat con los textos personalizados
+      const popcatUrl = `https://api.popcat.xyz/welcomecard?background=https://cdn.popcat.xyz/welcome-bg.png&text1=${encodeURIComponent(text1)}&text2=${encodeURIComponent(text2)}&text3=${encodeURIComponent(text3)}&avatar=${encodeURIComponent(avatarUrl)}`;
+
+      const response = await axios.get(popcatUrl, {
+        responseType: "arraybuffer",
+        timeout: 15000,
+      });
+
       const buffer = Buffer.from(response.data, "binary");
 
-      // Enviar al grupo
       await lite.sendMessage(from, {
         image: buffer,
         caption: `Hola @${numero} ¡Bienvenido al grupo!  
@@ -42,7 +47,7 @@ Estoy feliz de que estés aquí ^^
       });
     } catch (error) {
       errorLog("Alguien se unió al grupo y no pude enviar el mensaje de bienvenida.");
-      console.error(error);
+      console.error(error.message);
     }
   }
 }
