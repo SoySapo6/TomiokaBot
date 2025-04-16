@@ -14,11 +14,21 @@ async function welcome({ socket: lite, data }) {
   if (data.action === "add") {
     try {
       const numero = onlyNumbers(userJid); // Extraer el número del usuario
+      const waUrl = `https://wa.me/${numero}`;
 
-      // URL de Cloudinary con el número dinámico
-      const apiUrl = `https://res.cloudinary.com/dgsqkqjx6/image/upload/l_text:Arial_50_bold:${numero},co_rgb:FFFFFF/fl_preserve_transparency/v1742996754/6_sin_t%C3%ADtulo_20250326084529_widprx.jpg`;
+      // Obtener la imagen de perfil del número vía Microlink
+      const microlinkResponse = await axios.get(`https://api.microlink.io/?url=${waUrl}`);
+      const avatarUrl = microlinkResponse.data?.data?.image?.url;
 
-      const response = await axios.get(apiUrl, { responseType: "arraybuffer" });
+      // Verificación por si no devuelve imagen
+      if (!avatarUrl) {
+        throw new Error("No se pudo obtener la imagen del perfil.");
+      }
+
+      // Crear la URL final de Popcat con la imagen obtenida
+      const popcatUrl = `https://api.popcat.xyz/welcomecard?background=https://cdn.popcat.xyz/welcome-bg.png&text1=Zero%20Two&text2=Welcome+To+Pop+Cat+Community&text3=Member+${numero}&avatar=${encodeURIComponent(avatarUrl)}`;
+
+      const response = await axios.get(popcatUrl, { responseType: "arraybuffer" });
       const buffer = Buffer.from(response.data, "binary");
 
       // Enviar la imagen de bienvenida con el mensaje personalizado
@@ -32,6 +42,7 @@ Estoy feliz de que estés aquí ^^
       });
     } catch (error) {
       errorLog("Alguien se unió al grupo y no pude enviar el mensaje de bienvenida.");
+      console.error(error);
     }
   }
 }
