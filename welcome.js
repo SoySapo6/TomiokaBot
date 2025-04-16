@@ -39,10 +39,18 @@ async function welcome({ socket: lite, data }) {
 
       await lite.sendMessage(from, {
         image: buffer,
-        caption: `Hola @${numero} ¡Bienvenido al grupo!  
-Si quieres usar el bot, utiliza .menu  
-Estoy feliz de que estés aquí ^^  
-😉 SoyMaycol`,
+        caption: `Hola! @${número} 💃
+Bienvenido a este Bot 🤪
+
+•Que? Que tiene este Bot? 👀
+
+1. Un bot tematizado de Anime
+
+2. Un creador Guapo
+
+3. Comandos de Cuidar Mascotas y Más...
+
+ꜱᴏʏᴍᴀʏᴄᴏʟ ♪`,
         mentions: [userJid],
       });
     } catch (error) {
