@@ -4,10 +4,13 @@ const path = require("path");
 
 const descargarVideo = async (query) => {
     return new Promise((resolve, reject) => {
-        // Crear la carpeta si no existe
-        fs.mkdirSync('./videos', { recursive: true });
+        // Verifica si la carpeta 'videos' existe, si no, la crea
+        const outputDir = './videos';
+        if (!fs.existsSync(outputDir)) {
+            fs.mkdirSync(outputDir);
+        }
 
-        const outputPath = `./videos/${Date.now()}.mp4`;
+        const outputPath = `${outputDir}/${Date.now()}.mp4`;
         const command = `yt-dlp -f best -o "${outputPath}" "ytsearch:${query}"`;
 
         exec(command, (error, stdout, stderr) => {
@@ -20,4 +23,17 @@ const descargarVideo = async (query) => {
     });
 };
 
-module.exports = { descargarVideo };
+// Función para borrar el archivo después de un tiempo
+const borrarVideo = (filePath, delay = 5000) => {
+    setTimeout(() => {
+        fs.unlink(filePath, (err) => {
+            if (err) {
+                console.error(`Error al eliminar el archivo: ${err}`);
+            } else {
+                console.log(`Archivo eliminado: ${filePath}`);
+            }
+        });
+    }, delay);
+};
+
+module.exports = { descargarVideo, borrarVideo };
