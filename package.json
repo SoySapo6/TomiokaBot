@@ -1,6 +1,6 @@
 {
   "name": "Maycol AI",
-  "version": "V62",
+  "version": "6.3.0",
   "description": "Bot de WhatsApp minimalista multifunções.",
   "main": "start.js",
   "scripts": {
