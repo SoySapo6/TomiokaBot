@@ -105,7 +105,15 @@ Simulador de streamer: ¡Enfréntate a **trolls** y **hackeos**!
 
 ---
 
-⚠️ ADVERTENCIA: Si decides cambiar algunos de los comandos puede que el bot no encuentre algunos archivos, Se recomienda no cambiar nada. Y borra las Bailyes
+# En Caso de Apagarse
+Sirve en los dos Metodos
+
+```
+cd MaycolAI && npm start
+
+```
+
+Espero te Sirva :)
 
 ---
 # Instalacion Automática 📂
