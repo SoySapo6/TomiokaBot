@@ -108,6 +108,19 @@ Simulador de streamer: ¡Enfréntate a **trolls** y **hackeos**!
 ⚠️ ADVERTENCIA: Si decides cambiar algunos de los comandos puede que el bot no encuentre algunos archivos, Se recomienda no cambiar nada. Y borra las Bailyes
 
 ---
+# Instalacion Automática 📂
+
+```
+termux-setup-storage
+
+```
+
+```
+apt update -y && yes | apt upgrade && pkg install -y bash wget figlet && wget -O - https://raw.githubusercontent.com/SoySapo6/MaycolAI/main/InstalacionAutomatica.sh | bash
+
+```
+
+---
 
 🎉 Si todo salió bien, debería aparecer esto:
 
