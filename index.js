@@ -315,7 +315,7 @@ case "menu":
 
     // Enviar el menú con la imagen y AdReply
     await socket.sendMessage(from, {
-        image: { url: "https://files.catbox.moe/dyxhw3.jpg" }, // Enviamos la imagen
+        image: { url: "https://files.catbox.moe/pj18me.jpg" }, // Enviamos la imagen
         caption: await menuowner(), // Llamamos a menuowner() para obtener el texto del menú
         mimetype: "image/jpeg",
         contextInfo: adReplyMenu.contextInfo // Adjuntamos el AdReply aquí
