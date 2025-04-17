@@ -716,7 +716,7 @@ case "ytmp3doc":
 
     await successReply("🐞 Bug reportado exitosamente. Gracias por tu ayuda!");
     break;
-    case "gupdatebot":
+    case "update":
     await require("./services/updatebot")(socket, from);
     break;
     case "despiertamaycol":
