@@ -21,14 +21,14 @@ function print_ascii() {
 AUDIO_URL="https://files.catbox.moe/596y4p.m4a"
 AUDIO_FILE="$HOME/.maycol_music.m4a"
 
-# Descargar si no existe
+# Descargar si no existe (modo silencioso)
 if [ ! -f "$AUDIO_FILE" ]; then
     echo -e "$PurpleDescargando música épica...$Reset"
-    wget -O "$AUDIO_FILE" "$AUDIO_URL"
+    wget -q "$AUDIO_URL" -O "$AUDIO_FILE"
 fi
 
-# Reproducir música de fondo (en background)
-termux-media-player play "$AUDIO_FILE" &
+# Reproducir música en background (silenciosamente)
+termux-media-player play "$AUDIO_FILE" &>/dev/null &
 
 # Presentación mágica
 CHARACTER_1="Hanako-kun $Yellow✨"
