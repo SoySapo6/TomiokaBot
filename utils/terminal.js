@@ -44,21 +44,30 @@ function MensajeLog(message) {
 }
 
 function errorLog(message) {
-  console.log(
-    `\x1b[${textColor.red}m[🔥 ${botName}: CUIDADO!!!]\x1b[0m \x1b[${textColor.red}m${message}\x1b[0m`
-  );
+  const red = '\x1b[31m';
+  const reset = '\x1b[0m';
+
+  console.log(`${red}╭» 🚫 ERROR 🚫`);
+  console.log(`│→ Ha ocurrido un Error, Información:`);
+  console.log(`│${message}`);
+  console.log(`╰― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ⌫ ♻${reset}`);
 }
 
 function successLog(message) {
-  console.log(
-    `\x1b[${textColor.green}m[🎉 ${botName}: Hecho Exitosamente!]\x1b[0m \x1b[${textColor.green}m${message}\x1b[0m`
-  );
+  const green = '\x1b[32m';
+  const reset = '\x1b[0m';
+
+  console.log(`${green}| • ʜᴇᴄʜᴏ ᴇxɪᴛᴏꜱᴀᴍᴇɴᴛᴇ • | Hecho por SoyMaycol • | Infø: ${message} • |${reset}`);
 }
 
 function warningLog(message) {
-  console.log(
-    `\x1b[${textColor.yellow}m[☢ ${botName}: ATENCION]\x1b[0m \x1b[${textColor.yellow}m${message}\x1b[0m`
-  );
+  const yellow = '\x1b[33m';
+  const reset = '\x1b[0m';
+
+  console.log(`${yellow}╭» ⚠️ ADVERTENCIA ⚠️`);
+  console.log(`│→ Se ha detectado una advertencia:`);
+  console.log(`│${message}`);
+  console.log(`╰― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― ― 〄 ↺${reset}`);
 }
 
 function tutorLog(message, color = "magenta") {
