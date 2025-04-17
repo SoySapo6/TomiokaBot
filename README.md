@@ -79,6 +79,10 @@ Simulador de streamer: ¡Enfréntate a **trolls** y **hackeos**!
 - **Android con Termux**
 - **Node.js 18+**
 - **Git**
+- **Obligatoriamente Termux de F-Droid**
+
+  
+*Link*: https://f-droid.org/packages/com.termux/
 
 ### 🔧 **Pasos de instalación**:
 
