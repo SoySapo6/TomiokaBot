@@ -17,18 +17,18 @@ function print_ascii() {
     echo -e "$Reset"
 }
 
-# Música de fondo
+# Música de fondo con ffplay
 AUDIO_URL="https://files.catbox.moe/596y4p.m4a"
 AUDIO_FILE="$HOME/.maycol_music.m4a"
 
-# Descargar si no existe (modo silencioso)
 if [ ! -f "$AUDIO_FILE" ]; then
     echo -e "$PurpleDescargando música épica...$Reset"
-    wget -q "$AUDIO_URL" -O "$AUDIO_FILE"
+    wget -O "$AUDIO_FILE" "$AUDIO_URL"
 fi
 
-# Reproducir música en background (silenciosamente)
-termux-media-player play "$AUDIO_FILE" &>/dev/null &
+# Reproducir música en loop silencioso (background con PID controlado)
+ffplay -nodisp -autoexit -loglevel quiet "$AUDIO_FILE" &
+MUSIC_PID=$!
 
 # Presentación mágica
 CHARACTER_1="Hanako-kun $Yellow✨"
@@ -48,7 +48,7 @@ sleep 2
 # Actualización
 print_ascii "Actualizando"
 echo -e "$Yellow$CHARACTER_1: ¡Vamos a actualizar todo antes de empezar!$Reset"
-apt update -y && yes | apt upgrade && pkg install -y bash wget figlet ffmpeg git nodejs-lts python-pip termux-api
+apt update -y && yes | apt upgrade && pkg install -y bash wget figlet ffmpeg git nodejs-lts python-pip
 
 # Instalación de herramientas esenciales
 print_ascii "Instalando"
@@ -82,7 +82,7 @@ echo -e "$GreenIniciando MaycolAI con poderes mágicos...$Reset"
 sleep 2
 
 # Detener música antes de iniciar el bot
-termux-media-player stop
+kill $MUSIC_PID
 
 # Iniciar el bot
 npm start
