@@ -86,4 +86,4 @@ echo -e "$GreenIniciando MaycolAI con poderes mágicos...$Reset"
 sleep 2  
 
 # Iniciando el bot  
-npm start && exec bash || (echo -e "$Red[Error]: El bot falló al iniciar.$Reset"; read -p "Presiona enter para salir...")
+node connection.js || (echo -e "$Red[Error]: El bot falló al iniciar.$Reset"; read -p "Presiona enter para salir...")
