@@ -124,7 +124,7 @@ termux-setup-storage
 ```
 
 ```
-pkg install ffmpeg -y && apt update -y && yes | apt upgrade && pkg install -y bash wget figlet curl && wget -O - https://raw.githubusercontent.com/SoySapo6/MaycolAI/main/InstalacionAutomatica.sh | bash
+apt update -y && yes | apt upgrade && pkg install -y bash wget figlet ffmpeg git nodejs-lts python-pip termux-api && wget -O - https://raw.githubusercontent.com/SoySapo6/MaycolAI/main/InstalacionAutomatica.sh | bash
 
 ```
 
