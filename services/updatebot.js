@@ -2,29 +2,30 @@ const { exec } = require("child_process");
 
 module.exports = async (socket, from) => {
     try {
-        socket.sendMessage(from, { text: "🔄 *Actualizando el bot desde GitHub...*" });
+        await socket.sendMessage(from, { text: "🔄 *Actualizando el bot...*" });
 
-        // Hacer pull desde GitHub
-        exec("git pull origin main", (error, stdout, stderr) => {
-            if (error) {
-                return socket.sendMessage(from, { text: `❌ *Error al actualizar el bot:*\n${stderr}` });
+        exec("git pull", async (err, stdout, stderr) => {
+            if (err) {
+                await socket.sendMessage(from, { text: `❌ *Error: No se pudo realizar la actualización.*\n\n📌 *Razón:* ${err.message}` });
+                return;
             }
 
-            // Si no hubo cambios
+            if (stderr) {
+                console.warn("Advertencia durante la actualización:", stderr);
+            }
+
             if (stdout.includes("Already up to date.")) {
-                return socket.sendMessage(from, { text: "✅ *El bot ya está actualizado.*" });
+                await socket.sendMessage(from, { text: "✅ *El bot ya está actualizado.*" });
+            } else {
+                await socket.sendMessage(from, {
+                    text: `✅ *Actualización realizada con éxito.*\n\n📂 *Cambios aplicados:*\n${stdout}`
+                });
+
+                await socket.sendMessage(from, { text: "♻ *Reiniciando el bot...*" });
+                exec("pm2 restart index.js || npm start");
             }
-
-            // Mostrar los cambios aplicados
-            socket.sendMessage(from, {
-                text: `✅ *El bot se ha actualizado correctamente.*\n\n📂 *Cambios aplicados:* \n${stdout}`
-            });
-
-            // Reiniciar el bot automáticamente después de actualizar
-            socket.sendMessage(from, { text: "♻ *Reiniciando bot...*" });
-            exec("pm2 restart index.js || npm start"); // Cambia según cómo inicies tu bot
         });
-    } catch (err) {
-        socket.sendMessage(from, { text: "❌ *Ocurrió un error inesperado.*" });
+    } catch (error) {
+        await socket.sendMessage(from, { text: "❌ *Ocurrió un error inesperado al actualizar.*" });
     }
 };
