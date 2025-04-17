@@ -19,7 +19,7 @@ module.exports = async (socket, from) => {
     const rtime = (performance.now() - performance.now()).toFixed(7);
 
     const info = `💻 *Estado del Bot* 💻\n
-🌐 *Desarrollador:* Maycol AI
+🌐 *Desarrollador:* SoyMaycol
 
 🚀 *Tiempo activo:* ${uptime}
 
