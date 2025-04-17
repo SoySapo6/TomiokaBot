@@ -1,57 +1,76 @@
-#!/data/data/com.termux/files/usr/bin/bash
+#!/data/data/com.termux/files/usr/bin/bash  
 
-clear
+clear  
 
-# Función para imprimir texto ASCII con estilo
-function print_ascii() {
-    echo -e "\e[1;36m"
-    figlet -f slant "$1"
-    echo -e "\e[0m"
-}
+# Colores
+Cyan="\e[1;36m"
+Purple="\e[1;35m"
+Green="\e[1;32m"
+Red="\e[1;31m"
+Yellow="\e[1;33m"
+Reset="\e[0m"
 
-# Emojis de Hanako-kun
-EMOJI="️✨️☁️️"
+# Función para imprimir texto ASCII con estilo  
+function print_ascii() {  
+    echo -e "$Cyan"  
+    figlet -f slant "$1"  
+    echo -e "$Reset"  
+}  
+
+# Presentación mágica
+CHARACTER_1="Hanako-kun $Yellow✨"
+CHARACTER_2="Nene Yashiro $Purple♡"
+CHARACTER_3="Kou Minamoto $Green⚔️"
+
+echo -e "$Yellow$CHARACTER_1 aparece flotando sobre el script..."
+echo -e "$Purple$CHARACTER_2: ¡Hora de instalar algo genial!"
+echo -e "$Green$CHARACTER_3: ¡Vamos, que esto será rápido y fácil!$Reset"
+sleep 2
 
 print_ascii "MaycolAI"
-echo "Ajusta la Escala de La Pantalla"
-echo "Hecho por SoyMaycol"
-sleep 2
+echo -e "$PurpleAjusta la Escala de la Pantalla para una mejor experiencia...$Reset"
+echo -e "$GreenHecho con amor por SoyMaycol$Reset"
+sleep 2  
 
-# Actualización
-print_ascii "Actualizando"
-pkg update -y && pkg upgrade -y
+# Actualización  
+print_ascii "Actualizando"  
+echo -e "$Yellow$CHARACTER_1: ¡Vamos a actualizar todo antes de empezar!$Reset"
+pkg update -y && pkg upgrade -y  
 
-# Instalación de herramientas esenciales
-print_ascii "Instalando Dependencias"
-pkg install git -y
-pkg install nodejs-lts -y
-pkg install ffmpeg -y
-pkg install python-pip -y
-npm install -g yarn
-pip install yt-dlp
+# Instalación de herramientas esenciales  
+print_ascii "Instalando"  
+echo -e "$Purple$CHARACTER_2: Instalando herramientas esenciales...$Reset"
+pkg install git -y  
+pkg install nodejs-lts -y  
+pkg install ffmpeg -y  
+pkg install python-pip -y  
+npm install -g yarn  
+pip install yt-dlp  
 
-# Clonando repositorio
-print_ascii "Clonando Repositorio"
-git clone https://github.com/SoySapo6/MaycolAI
+# Clonando repositorio  
+print_ascii "Clonando Repo"  
+echo -e "$Green$CHARACTER_3: Descargando MaycolAI desde los cielos digitales...$Reset"
+git clone https://github.com/SoySapo6/MaycolAI  
 
-cd MaycolAI
+cd MaycolAI  
 
-# Instalando módulos del proyecto
-print_ascii "Instalando Modulos"
-npm install
-npm install gemini-chatbot
+# Instalando módulos del proyecto  
+print_ascii "Dependencias"  
+echo -e "$Yellow$CHARACTER_1: Invocando todos los módulos necesarios...$Reset"
+npm install  
+npm install gemini-chatbot  
 
-# Eliminando baileys si existe
-print_ascii "Borrando Sessiones"
-echo "Menos errorres"
-rm -rf baileys
+# Eliminando sesiones antiguas  
+print_ascii "Limpieza"  
+echo -e "$Red$CHARACTER_3: Eliminando sesiones pasadas para evitar errores...$Reset"
+rm -rf baileys  
 
-# Mensaje final
-clear
-print_ascii "Instalacion Completa"
-echo -e "\e[1;35mGracias por elegirme <3 \e[0m"
-echo -e "\e[1;32mIniciando MaycolAI...\e[0m"
-sleep 2
+# Mensaje final  
+clear  
+print_ascii "¡Listo!"  
+echo -e "$PurpleGracias por usar MaycolAI, eres lo máximo <3$Reset"
+echo -e "$GreenIniciando MaycolAI con poderes mágicos...$Reset"
+sleep 2  
 
-# Iniciando el bot
+# Iniciando el bot  
 npm start
