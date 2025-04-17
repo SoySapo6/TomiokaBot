@@ -24,7 +24,7 @@ if ! command -v mpv &> /dev/null; then
 fi
 
 # Reproducir música en bucle y en segundo plano (pero audible)
-mpv --really-quiet --loop https://files.catbox.moe/596y4p.m4a &  
+mpv --really-quiet --loop https://files.catbox.moe/tmhmm8.mp3 &  
 MUSIC_PID=$!
 
 # Presentación mágica
