@@ -82,8 +82,9 @@ kill $MUSIC_PID
 clear  
 print_ascii "¡Listo!"  
 echo -e "$PurpleGracias por usar MaycolAI, eres lo máximo <3$Reset"
-echo -e "$GreenIniciando MaycolAI con poderes mágicos...$Reset"
-sleep 2  
-
-# Iniciando el bot  
-exec npm start
+echo -e "$GreenPara iniciar el bot, ejecuta manualmente el siguiente comando:$Reset"
+echo -e "$Cyan"
+echo "cd MaycolAI && npm start"
+echo -e "$Reset"
+echo -e "$YellowPulsa ENTER cuando lo hayas leído ^^$Reset"
+read
