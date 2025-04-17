@@ -9,6 +9,7 @@ const chistes = [
     "¿Cómo se despiden los químicos?\nÁcido un placer.",
     "¿Cuál es el colmo de Aladdín?\nTener mal genio.",
     "¿Qué le dijo un jardinero a otro?\nDisfrutemos mientras podamos."
+    "¿Qué le Digo a mi Mama?\nMama xD."
 ];
 
 function obtenerChiste() {
