@@ -86,5 +86,5 @@ echo -e "$GreenPara iniciar el bot, ejecuta manualmente el siguiente comando:$Re
 echo -e "$Cyan"
 echo "cd MaycolAI && npm start"
 echo -e "$Reset"
-echo -e "$YellowPulsa ENTER cuando lo hayas leído ^^$Reset"
+echo -e "$YellowPulsa Hecho por SoyMaycol 👻$Reset"
 read
