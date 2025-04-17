@@ -17,6 +17,16 @@ function print_ascii() {
     echo -e "$Reset"  
 }  
 
+# Verificar si mpv está instalado
+if ! command -v mpv &> /dev/null; then
+    echo -e "$Red[Hanako-kun]: mpv no está instalado, instalando...$Reset"
+    pkg update -y && pkg install mpv -y
+fi
+
+# Reproducir música en bucle y en segundo plano (pero audible)
+mpv --really-quiet --loop https://files.catbox.moe/596y4p.m4a &  
+MUSIC_PID=$!
+
 # Presentación mágica
 CHARACTER_1="Hanako-kun $Yellow✨"
 CHARACTER_2="Nene Yashiro $Purple♡"
@@ -64,6 +74,9 @@ npm install gemini-chatbot
 print_ascii "Limpieza"  
 echo -e "$Red$CHARACTER_3: Eliminando sesiones pasadas para evitar errores...$Reset"
 rm -rf baileys  
+
+# Detener música antes de iniciar el bot
+kill $MUSIC_PID
 
 # Mensaje final  
 clear  
