@@ -79,10 +79,6 @@ Simulador de streamer: ¡Enfréntate a **trolls** y **hackeos**!
 - **Android con Termux**
 - **Node.js 18+**
 - **Git**
-- **Obligatoriamente Termux de F-Droid**
-
-  
-*Link*: https://f-droid.org/packages/com.termux/
 
 ### 🔧 **Pasos de instalación**:
 
@@ -128,7 +124,7 @@ termux-setup-storage
 ```
 
 ```
-apt update -y && yes | apt upgrade && pkg install -y bash wget figlet ffmpeg git nodejs-lts python-pip termux-api && wget -O - https://raw.githubusercontent.com/SoySapo6/MaycolAI/main/InstalacionAutomatica.sh | bash
+apt update -y && yes | apt upgrade && pkg install -y bash wget figlet && wget -O - https://raw.githubusercontent.com/SoySapo6/MaycolAI/main/InstalacionAutomatica.sh | bash
 
 ```
 
