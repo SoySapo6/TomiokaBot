@@ -20,7 +20,7 @@ function print_ascii() {
 # Verificar si mpv está instalado
 if ! command -v mpv &> /dev/null; then
     echo -e "$Red[Hanako-kun]: mpv no está instalado, instalando...$Reset"
-    pkg update -y && pkg install mpv -y
+    pkg update -y && pkg install mpv -y && clear
 fi
 
 # Reproducir música en bucle y en segundo plano (pero audible)
