@@ -14,7 +14,7 @@ const estadoInicial = {
     hambre: 50,
     felicidad: 50,
     energia: 50,
-    salud: 100,
+    salud: 50,
     higiene: 50,
     durmiendo: false,
     despertarEn: null,
