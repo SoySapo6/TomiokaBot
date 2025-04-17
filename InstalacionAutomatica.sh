@@ -17,29 +17,29 @@ function print_ascii() {
     echo -e "$Reset"
 }
 
-# Personajes
-CHARACTER_1="Hanako-kun $Yellow✨"
-CHARACTER_2="Nene Yashiro $Purple♡"
-CHARACTER_3="Kou Minamoto $Green⚔️"
-
-# Gestor de errores simpático
-function gestionar_error() {
-    echo -e "$Red$CHARACTER_1: Uh. Al parecer ha habido un error 😶$Reset"
-    echo -e "$Purple$CHARACTER_2: Bueno, ¡no te preocupes! Lo intentaremos arreglar...$Reset"
-    print_ascii "Arreglando"
-    sleep 2
-
-    "$@"  # Reintenta el comando que falló
-
-    if [ $? -ne 0 ]; then
-        echo -e "$Red$CHARACTER_3: Lamentablemente no pudimos arreglar el error :c$Reset"
-        exit 1
+# Función para manejar errores
+function handle_error() {
+    ERROR_MSG="$1"
+    if echo "$ERROR_MSG" | grep -q "ENOTEMPTY.*yarn"; then
+        echo -e "$Red$ERROR_MSG$Reset"
+        echo -e "$Green$CHARACTER_3: Nah, ese error es normal. No te preocupes ^^$Reset"
     else
-        echo -e "$Green$CHARACTER_3: ¡Listo! El error fue solucionado exitosamente.$Reset"
+        echo -e "$Red$ERROR_MSG$Reset"
+        echo -e "$Yellow$CHARACTER_1: Uh. Al parecer ha habido un error 😶$Reset"
+        echo -e "$Purple$CHARACTER_2: Bueno, ¡no te preocupes! Lo intentaremos arreglar...$Reset"
+        sleep 2
+        print_ascii "Arreglando"
+        sleep 1
+        # Intento de reparación o ignorar
+        echo -e "$Green$CHARACTER_3: Intentamos solucionarlo, ¡vamos a seguir!$Reset"
     fi
 }
 
 # Presentación mágica
+CHARACTER_1="Hanako-kun $Yellow✨"
+CHARACTER_2="Nene Yashiro $Purple♡"
+CHARACTER_3="Kou Minamoto $Green⚔️"
+
 echo -e "$Yellow$CHARACTER_1 aparece flotando sobre el script..."
 echo -e "$Purple$CHARACTER_2: ¡Hora de instalar algo genial!"
 echo -e "$Green$CHARACTER_3: ¡Vamos, que esto será rápido y fácil!$Reset"
@@ -50,33 +50,44 @@ echo -e "$PurpleAjusta la Escala de la Pantalla para una mejor experiencia...$Re
 echo -e "$GreenHecho con amor por SoyMaycol$Reset"
 sleep 2
 
+# Ejecutar comando con gestión de errores
+function safe_run() {
+    OUTPUT=$(eval "$1" 2>&1)
+    STATUS=$?
+    if [ $STATUS -ne 0 ]; then
+        handle_error "$OUTPUT"
+    else
+        echo "$OUTPUT"
+    fi
+}
+
 # Actualización
 print_ascii "Actualizando"
 echo -e "$Yellow$CHARACTER_1: ¡Vamos a actualizar todo antes de empezar!$Reset"
-gestionar_error pkg update -y && pkg upgrade -y
+safe_run "pkg update -y && pkg upgrade -y"
 
 # Instalación de herramientas esenciales
 print_ascii "Instalando"
 echo -e "$Purple$CHARACTER_2: Instalando herramientas esenciales...$Reset"
-gestionar_error pkg install git -y
-gestionar_error pkg install nodejs-lts -y
-gestionar_error pkg install ffmpeg -y
-gestionar_error pkg install python-pip -y
-gestionar_error npm install -g yarn
-gestionar_error pip install yt-dlp
+safe_run "pkg install git -y"
+safe_run "pkg install nodejs-lts -y"
+safe_run "pkg install ffmpeg -y"
+safe_run "pkg install python-pip -y"
+safe_run "npm install -g yarn"
+safe_run "pip install yt-dlp"
 
 # Clonando repositorio
 print_ascii "Clonando Repo"
 echo -e "$Green$CHARACTER_3: Descargando MaycolAI desde los cielos digitales...$Reset"
-gestionar_error git clone https://github.com/SoySapo6/MaycolAI
+safe_run "git clone https://github.com/SoySapo6/MaycolAI"
 
-cd MaycolAI || exit 1
+cd MaycolAI || exit
 
 # Instalando módulos del proyecto
 print_ascii "Dependencias"
 echo -e "$Yellow$CHARACTER_1: Invocando todos los módulos necesarios...$Reset"
-gestionar_error npm install
-gestionar_error npm install gemini-chatbot
+safe_run "npm install"
+safe_run "npm install gemini-chatbot"
 
 # Eliminando sesiones antiguas
 print_ascii "Limpieza"
