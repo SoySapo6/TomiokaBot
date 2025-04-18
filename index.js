@@ -778,7 +778,7 @@ case "ytmp3doc":
 
     // Reproducir el audio en Termux con volumen alto
     const { exec } = require("child_process");
-    exec('mpv --volume=100 "/storage/emulated/0/Gatito-mi-bot/audios/despiertamaycol.mp3"');
+    exec('mpv --volume=100 "audios/despiertamaycol.mp3"');
 
     break;
         case "grupo":
