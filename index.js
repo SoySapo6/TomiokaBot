@@ -276,6 +276,16 @@ async function runLite({ socket, data }) {
         await reply("Guau Guau 🐶");
     await require("./services/dog")(socket, from);
     break;
+      case "power":
+case "apagar":
+case "shutdown":
+  await socket.sendMessage(from, { text: 'Apagando MaycolAI... Hasta pronto!' });
+
+  // Espera un segundo antes de apagar
+  setTimeout(() => {
+    process.exit(); // Finaliza el proceso
+  }, 1000);
+  break;
     case "pooh":
   const [texto1, ...resto] = args.join(' ').split('|');
   const texto2 = resto.join('|');
