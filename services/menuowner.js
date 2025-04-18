@@ -158,6 +158,7 @@ ${profileCount}
 
 😿 ${PREFIX}sadcat
 🐢 ${PREFIX}oogway
+🐻 ${PREFIX}pooh
 
 ─────────❖───────── ✎
 
