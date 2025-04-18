@@ -6,7 +6,9 @@ module.exports = async (socket, from) => {
 
         exec("git pull", async (err, stdout, stderr) => {
             if (err) {
-                await socket.sendMessage(from, { text: `❌ *Error: No se pudo realizar la actualización.*\n\n📌 *Razón:* ${err.message}` });
+                await socket.sendMessage(from, {
+                    text: `❌ *Error: No se pudo realizar la actualización.*\n\n📌 *Razón:* ${err.message}`
+                });
                 return;
             }
 
@@ -20,10 +22,9 @@ module.exports = async (socket, from) => {
                 await socket.sendMessage(from, {
                     text: `✅ *Actualización realizada con éxito.*\n\n📂 *Cambios aplicados:*\n${stdout}`
                 });
-
-                await socket.sendMessage(from, { text: "♻ *Reiniciando el bot...*" });
-                exec("pm2 restart index.js || npm start");
             }
+
+            // Nada más se hace después del pull.
         });
     } catch (error) {
         await socket.sendMessage(from, { text: "❌ *Ocurrió un error inesperado al actualizar.*" });
