@@ -309,7 +309,7 @@ case "shutdown":
     await socket.sendMessage(from, { text: 'No se pudo generar el meme de Pooh.' });
   }
   break;
-   case "oogway";
+   case "oogway":
   const textoOogway = args.join(' ');
   if (!textoOogway) {
     await socket.sendMessage(from, { text: 'Escribe el texto que dirá el maestro Oogway.' });
