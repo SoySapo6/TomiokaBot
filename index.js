@@ -333,9 +333,6 @@ case "shutdown":
 case "karkat":
     await require("./services/KarKat")(socket, from, args);
     break;
-    case "attp":
-  await require("./services/attp")(socket, from, args);
-  break;
         case "deepseek":
     await reply("Generando Respuesta... Espera ^^");
     await deepseek.execute(socket, from, args);
@@ -582,26 +579,9 @@ case "lite":
       await socket.sendMessage(from, { text: 'Hubo un error al generar el video. Por favor, intenta de nuevo más tarde.' });
     }
     break;
-    case "attp":
-    const texto = args.join(' '); // Tomamos el texto que sigue a "attp"
-    if (!texto) {
-      await socket.sendMessage(from, { text: 'Por favor, ingresa el texto para crear la imagen.' });
-      break;
-    }
-
-    try {
-      // Llamamos a la función que genera la imagen con el texto
-      const imagenGenerada = await generarImagenConTexto(texto);
-
-      // Enviamos la imagen
-      await socket.sendMessage(from, { image: fs.readFileSync(imagenGenerada), caption: 'Aquí está tu imagen con el texto.' });
-
-      // Eliminamos la imagen para liberar espacio
-      fs.unlinkSync(imagenGenerada);
-    } catch (error) {
-      await socket.sendMessage(from, { text: 'Hubo un error al generar la imagen. Por favor, intenta de nuevo más tarde.' });
-    }
-    break;
+      case "attp":
+  await require("./services/attp")(socket, from, args);
+  break;
     case "termux":
     if (!args.length) {
         await socket.sendMessage(from, { text: "❌ *Debes escribir un comando para ejecutar.*" });
