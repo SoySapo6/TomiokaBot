@@ -580,7 +580,7 @@ case "lite":
     }
     break;
       case "attp":
-  await require("./services/attp")(socket, from, args, info);
+  await require("./services/attp")(socket, from, args);
   break;
     case "termux":
     if (!args.length) {
