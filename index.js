@@ -276,7 +276,7 @@ async function runLite({ socket, data }) {
         await reply("Guau Guau 🐶");
     await require("./services/dog")(socket, from);
     break;
-   case "oogway":
+   case "oogway";
   const textoOogway = args.join(' ');
   if (!textoOogway) {
     await socket.sendMessage(from, { text: 'Escribe el texto que dirá el maestro Oogway.' });
