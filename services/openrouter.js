@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-const OPENROUTER_API_KEY = "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"; // Reemplázalo con tu clave real
+const OPENROUTER_API_KEY = "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"; // Reemplázalo con tu clave real
 
 async function chatOpenRouter(prompt) {
     try {
