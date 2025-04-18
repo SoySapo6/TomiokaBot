@@ -379,9 +379,7 @@ case "dalle":
     await tempmail.execute(socket, from, args);
     break;
 case "menu":
-    await successReact();
-    await successReply("¡Aquí tienes el menú!");
-
+    await react("🇯🇵");
     // Obtener el AdReply
     let adReplyMenu = getAdReplyScript(); // Llama a la función para obtener el AdReply
 
