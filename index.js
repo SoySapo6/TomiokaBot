@@ -589,6 +589,24 @@ case "lite":
     }
     await ejecutarTermux(socket, from, args.join(" "));
     break;
+      case 'clicker': {
+  let puntos = Math.floor(Math.random() * 10) + 1;
+
+  const mensaje = {
+    caption: `Has hecho clic y ganaste *${puntos} puntos*!`,
+    image: { url: 'https://i.imgur.com/W1a9nAv.png' }, // Imagen divertida opcional
+    footer: 'MaycolAI Clicker v1',
+    templateButtons: [
+      { index: 1, quickReplyButton: { displayText: '¡Seguir clickeando!', id: 'clicker' } },
+      { index: 2, quickReplyButton: { displayText: 'Ver puntos', id: 'verpuntos' } },
+      { index: 3, quickReplyButton: { displayText: 'Tienda', id: 'tienda' } }
+    ]
+  }
+
+  await socket.sendMessage(from, mensaje, { quoted: m });
+  break;
+      }
+      
 case "perro":
   await react("🐶");
   await reply("Obteniendo una foto de un perro...");
