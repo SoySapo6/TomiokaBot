@@ -296,6 +296,27 @@ case "stream":
     case "play":
     await require("./services/SoundCloud").execute(socket, from, args);
     break;
+      case "sadcat":
+  const textoSadCat = args.join(' ');
+  if (!textoSadCat) {
+    await socket.sendMessage(from, { text: 'Por favor, escribe el texto para el gato triste.' });
+    break;
+  }
+
+  try {
+    const { generarSadCat } = require('./services/sadcat');
+    const sadCatImage = await generarSadCat(textoSadCat);
+
+    await socket.sendMessage(from, {
+      image: fs.readFileSync(sadCatImage),
+      caption: 'Aquí tienes tu gato triste con una lata...'
+    });
+
+    fs.unlinkSync(sadCatImage);
+  } catch (error) {
+    await socket.sendMessage(from, { text: 'No se pudo generar la imagen del gato triste.' });
+  }
+  break;
 case "dalle":
     await require("./services/dalle").execute(socket, from, args);
     break;
