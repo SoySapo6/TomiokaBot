@@ -157,6 +157,7 @@ ${profileCount}
 🤣 𝙈𝙚𝙢𝙚𝙨 🤣
 
 😿 ${PREFIX}sadcat
+🐢 ${PREFIX}oggway
 
 ─────────❖───────── ✎
 
