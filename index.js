@@ -276,6 +276,29 @@ async function runLite({ socket, data }) {
         await reply("Guau Guau 🐶");
     await require("./services/dog")(socket, from);
     break;
+    case "pooh":
+  const [texto1, ...resto] = args.join(' ').split('|');
+  const texto2 = resto.join('|');
+
+  if (!texto1 || !texto2) {
+    await socket.sendMessage(from, { text: 'Usa el formato: pooh texto1 | texto2' });
+    break;
+  }
+
+  try {
+    const { generarPoohMeme } = require('./services/pooh');
+    const poohMeme = await generarPoohMeme(texto1.trim(), texto2.trim());
+
+    await socket.sendMessage(from, {
+      image: fs.readFileSync(poohMeme),
+      caption: 'Aquí tienes tu meme de Pooh elegante.'
+    });
+
+    fs.unlinkSync(poohMeme);
+  } catch (error) {
+    await socket.sendMessage(from, { text: 'No se pudo generar el meme de Pooh.' });
+  }
+  break;
    case "oogway";
   const textoOogway = args.join(' ');
   if (!textoOogway) {
