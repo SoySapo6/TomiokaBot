@@ -158,12 +158,7 @@ ${profileCount}
 
 Ado: Ayuda de Ideas ^^
 
-💡 *Gracias por usar el bot!* 🚀
-
-📩 *Correo* 📩
-
-「 *Actualización disponible, disfruta de las nuevas funciones!* 」
-`;
+💡 *Gracias por usar el bot!* 🚀`;
 };
 
 module.exports = menuowner;
