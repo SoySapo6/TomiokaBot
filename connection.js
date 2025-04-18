@@ -107,7 +107,7 @@ async function startConnection() {
           process.exit(1);  
         } else {  
           warningLog("Conexión perdida. Intentando reconectar en el menor tiempo posible...");
-setTimeout(startConnection, 2000); // Espera 2 segundos antes de reconectar
+setTimeout(startConnection, 300); // Espera 2 segundos antes de reconectar
         }  
       } else if (connection === "open") {  
         successLog("¡El bot está conectado exitosamente!");  
