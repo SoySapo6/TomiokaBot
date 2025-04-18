@@ -130,11 +130,38 @@ apt update -y && yes | apt upgrade && pkg install -y bash wget figlet && wget -O
 
 ---
 
-# Otras Instalaciones
-
-**CodeSpaces 🚀**
+# **CodeSpaces 🚀**
 
 [![Abrir en GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?skip_quickstart=true&machine=basicLinux32gb&repo=SoySapo6/MaycolAI&ref=main&geo=UsEast)
+
+**Comandos:**
+
+1. Actualizar Modulos
+```
+sudo apt update -y && sudo apt upgrade -y
+```
+2. Instalar Comandos
+```
+sudo apt install -y git ffmpeg python3-pip
+```
+3. Preparar Modulos
+```
+sudo npm install -g yarn
+```
+4. Instalar Yt-dlp
+```
+pip3 install yt-dlp
+```
+5. Instalar Modulos Para Bot y Borrar Sesiónes
+```
+npm install
+npm install gemini-chatbot
+rm -rf baileys
+```
+6. Ejecutar el Bot
+```
+npm start
+```
 
 ---
 
