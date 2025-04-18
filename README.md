@@ -130,6 +130,14 @@ apt update -y && yes | apt upgrade && pkg install -y bash wget figlet && wget -O
 
 ---
 
+# Otras Instalaciones
+
+**CodeSpaces 🚀**
+
+[![Abrir en GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?skip_quickstart=true&machine=basicLinux32gb&repo=SoySapo6/MaycolAI&ref=main&geo=UsEast)
+
+---
+
 🎉 Si todo salió bien, debería aparecer esto:
 
 ![MaycolAI2](https://i.postimg.cc/MZCNbX3T/2-sin-t-tulo-20250323185348.png)
