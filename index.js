@@ -276,6 +276,27 @@ async function runLite({ socket, data }) {
         await reply("Guau Guau 🐶");
     await require("./services/dog")(socket, from);
     break;
+   case "oogway":
+  const textoOogway = args.join(' ');
+  if (!textoOogway) {
+    await socket.sendMessage(from, { text: 'Escribe el texto que dirá el maestro Oogway.' });
+    break;
+  }
+
+  try {
+    const { generarOogway } = require('./services/oogway');
+    const imagenOogway = await generarOogway(textoOogway);
+
+    await socket.sendMessage(from, {
+      image: fs.readFileSync(imagenOogway),
+      caption: 'Sabias palabras del maestro Oogway.'
+    });
+
+    fs.unlinkSync(imagenOogway);
+  } catch (error) {
+    await socket.sendMessage(from, { text: 'No se pudo generar la imagen del maestro Oogway.' });
+  }
+  break;
 case "karkat":
     await require("./services/KarKat")(socket, from, args);
     break;
