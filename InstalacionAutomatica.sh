@@ -1,5 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash  
 
+curl -s -o Hanako.png https://files.catbox.moe/aml84a.png
 clear  
 
 # Colores
@@ -80,7 +81,8 @@ kill $MUSIC_PID
 
 # Mensaje final  
 clear  
-print_ascii "¡Listo!"  
+print_ascii "Instalacion Exitosa"
+jp2a --color Hanako.png
 echo -e "$PurpleGracias por usar MaycolAI, eres lo máximo <3$Reset"
 echo -e "$GreenPara iniciar el bot, ejecuta manualmente el siguiente comando:$Reset"
 echo -e "$Cyan"
