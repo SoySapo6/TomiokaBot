@@ -89,7 +89,6 @@ ${profileCount}
 🔵 ${PREFIX}ejecutarc ✦
 🔴 ${PREFIX}ejecutarcpp ✦
 ☕ ${PREFIX}ejecutarjava ✦
-🖥️ ${PREFIX}termux ✦
 🖥️ ${PREFIX}script ✦
 💻 ${PREFIX}info ✦
 
