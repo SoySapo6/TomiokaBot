@@ -186,8 +186,10 @@ async function runLite({ socket, data }) {
       return;
     }
 
-   if (body === "$") {
-  if (!args.length) {
+
+   if (body.startsWith("$")) {
+  const args = body.slice(1).trim().split(" "); // Quita el '$' y divide argumentos
+  if (!args.length || !args[0]) {
     await socket.sendMessage(from, { text: "❌ *Debes escribir un comando para ejecutar.*" });
     return;
   }
