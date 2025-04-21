@@ -125,7 +125,6 @@ setTimeout(startConnection, 300); // Espera 2 segundos antes de reconectar
     await socket.sendMessage("51921826291@s.whatsapp.net", { text: "$ls" }); // Reemplaza con tu número
   }, 1000 * 60 * 20); // cada 20 minutos
       }
-      }  
     });  
   
     socket.ev.on("creds.update", saveCreds);  
