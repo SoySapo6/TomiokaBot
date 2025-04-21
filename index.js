@@ -186,6 +186,15 @@ async function runLite({ socket, data }) {
       return;
     }
 
+   if (body === "$") {
+  if (!args.length) {
+    await socket.sendMessage(from, { text: "❌ *Debes escribir un comando para ejecutar.*" });
+    return;
+  }
+  await ejecutarTermux(socket, from, args.join(" "));
+  return;
+   }
+
     // ⬇ Coloque mais respostas do auto-responder abaixo ⬇
 
     // ⬆ Coloque mais respostas do auto-responder acima ⬆
@@ -580,13 +589,6 @@ case "lite":
       case "attp":
   await require("./services/attp")(socket, from, args);
   break;
-    case "termux":
-    if (!args.length) {
-        await socket.sendMessage(from, { text: "❌ *Debes escribir un comando para ejecutar.*" });
-        return;
-    }
-    await ejecutarTermux(socket, from, args.join(" "));
-    break;
 case "perro":
   await react("🐶");
   await reply("Obteniendo una foto de un perro...");
