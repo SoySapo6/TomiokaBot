@@ -10,22 +10,17 @@ Red="\e[1;31m"
 Yellow="\e[1;33m"
 Reset="\e[0m"
 
+# Función para imprimir texto ASCII con estilo
 function print_ascii() {
     echo -e "$Cyan"
     figlet -f slant "$1"
     echo -e "$Reset"
 }
 
-# Verificar si figlet está instalado
-if ! command -v figlet &> /dev/null; then
-    echo -e "$Red[Hanako-kun]: figlet no está instalado, instalando...$Reset"
-    sudo apt update && sudo apt install figlet -y
-fi
-
 # Presentación mágica
-CHARACTER_1="Hanako-kun ✨"
-CHARACTER_2="Nene Yashiro ♡"
-CHARACTER_3="Kou Minamoto ⚔️"
+CHARACTER_1="Hanako-kun $Yellow✨"
+CHARACTER_2="Nene Yashiro $Purple♡"
+CHARACTER_3="Kou Minamoto $Green⚔️"
 
 echo -e "$Yellow$CHARACTER_1 aparece flotando sobre el script..."
 echo -e "$Purple$CHARACTER_2: ¡Hora de instalar algo genial!"
@@ -33,37 +28,35 @@ echo -e "$Green$CHARACTER_3: ¡Vamos, que esto será rápido y fácil!$Reset"
 sleep 2
 
 print_ascii "MaycolAI"
-echo -e "$Purple Ajusta la Terminal para una mejor experiencia...$Reset"
-echo -e "$Green Hecho con amor por SoyMaycol$Reset"
+echo -e "$PurpleAjusta la Escala del Terminal para una mejor experiencia...$Reset"
+echo -e "$GreenHecho con amor por SoyMaycol$Reset"
+echo -e "$Yellow$CHARACTER_1: Reproduciendo música (simulada)...$Reset"
 sleep 2
 
 # Actualización
 print_ascii "Actualizando"
+echo -e "$Yellow$CHARACTER_1: ¡Vamos a asegurarnos que todo esté al día!$Reset"
 sudo apt update -y && sudo apt upgrade -y
 
-# Instalación de herramientas
+# Instalación de herramientas esenciales
 print_ascii "Instalando"
 echo -e "$Purple$CHARACTER_2: Instalando herramientas esenciales...$Reset"
-sudo apt install -y git nodejs npm ffmpeg python3-pip
+sudo apt install -y git curl nodejs npm ffmpeg python3-pip jp2a figlet
 
-# Configurar NodeJS si es necesario
-sudo npm install -g yarn
-pip3 install yt-dlp
+# Módulos globales
+npm install -g yarn
+pip install yt-dlp
 
-# Clonar repo
-print_ascii "Clonando Repo"
-echo -e "$Green$CHARACTER_3: Descargando MaycolAI desde los cielos digitales...$Reset"
-git clone https://github.com/SoySapo6/MaycolAI
-cd MaycolAI
+# Suponiendo que ya estás dentro del repo
 curl -s -o Hanako.png https://files.catbox.moe/aml84a.png
 
-# Instalar dependencias del bot
+# Instalando módulos del proyecto
 print_ascii "Dependencias"
 echo -e "$Yellow$CHARACTER_1: Invocando todos los módulos necesarios...$Reset"
 npm install
 npm install gemini-chatbot
 
-# Limpiar sesiones antiguas
+# Eliminando sesiones antiguas
 print_ascii "Limpieza"
 echo -e "$Red$CHARACTER_3: Eliminando sesiones pasadas para evitar errores...$Reset"
 rm -rf baileys
@@ -71,9 +64,10 @@ rm -rf baileys
 # Mensaje final
 clear
 print_ascii "SoyMaycol"
+jp2a --color Hanako.png
 echo -e "$Purple Gracias por usar MaycolAI, eres lo máximo <3$Reset"
-echo -e "$Green Para iniciar el bot, ejecuta el siguiente comando:$Reset"
+echo -e "$Green Para iniciar el bot, ejecuta manualmente:$Reset"
 echo -e "$Cyan"
-echo "cd MaycolAI && npm start"
+echo "npm start"
 echo -e "$Reset"
 read -p "Presiona Enter para salir..."
