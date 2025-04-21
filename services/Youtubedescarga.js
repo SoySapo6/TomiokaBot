@@ -12,9 +12,10 @@ const descargarVideo = async (query) => {
 
         const outputPath = `${outputDir}/${Date.now()}.mp4`;
         
-        // Utiliza el comando yt-dlp sin necesidad de cookies y seleccionando el formato automáticamente
-        const command = `yt-dlp -f bestaudio+bestaudio/best -o "${outputPath}" "ytsearch:${query}"`;
-
+        // Comando de yt-dlp con User-Agent personalizado
+        const command = `yt-dlp --user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36" -f bestaudio+bestaudio/best -o "${outputPath}" "ytsearch:${query}"`;
+        
+        // Ejecuta el comando para descargar el video
         exec(command, (error, stdout, stderr) => {
             if (error) {
                 reject(`Error: ${stderr}`);
