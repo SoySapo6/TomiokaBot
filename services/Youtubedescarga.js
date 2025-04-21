@@ -1,8 +1,8 @@
-const { exec } = require("child_process");
+const axios = require("axios");
 const fs = require("fs");
 const path = require("path");
 
-const descargarVideo = async (query) => {
+const descargarVideo = async (url) => {
     return new Promise((resolve, reject) => {
         // Verifica si la carpeta 'videos' existe, si no, la crea
         const outputDir = './videos';
@@ -10,19 +10,37 @@ const descargarVideo = async (query) => {
             fs.mkdirSync(outputDir);
         }
 
+        // Nombre del archivo de salida
         const outputPath = `${outputDir}/${Date.now()}.mp4`;
-        
-        // Comando de yt-dlp con User-Agent personalizado
-        const command = `yt-dlp --user-agent "User Agent: Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Mobile Safari/537.36" -f bestaudio+bestaudio/best -o "${outputPath}" "ytsearch:${query}"`;
-        
-        // Ejecuta el comando para descargar el video
-        exec(command, (error, stdout, stderr) => {
-            if (error) {
-                reject(`Error: ${stderr}`);
-            } else {
-                resolve(outputPath);
-            }
-        });
+
+        // Hacer la solicitud a la API de Starlight
+        const apiUrl = `https://apis-starlights-team.koyeb.app/starlight/youtube-mp4?url=${encodeURIComponent(url)}`;
+
+        // Realiza la petición HTTP
+        axios.get(apiUrl)
+            .then((response) => {
+                if (response.data && response.data.url) {
+                    // Si la respuesta tiene la URL del archivo, descárgalo
+                    const videoUrl = response.data.url;
+                    
+                    // Usamos `wget` para descargar el video
+                    const downloadCommand = `wget -O "${outputPath}" "${videoUrl}"`;
+
+                    // Ejecutamos el comando para descargar
+                    require("child_process").exec(downloadCommand, (error, stdout, stderr) => {
+                        if (error) {
+                            reject(`Error: ${stderr}`);
+                        } else {
+                            resolve(outputPath);
+                        }
+                    });
+                } else {
+                    reject("No se pudo obtener el enlace del video.");
+                }
+            })
+            .catch((error) => {
+                reject(`Error al hacer la solicitud: ${error.message}`);
+            });
     });
 };
 
