@@ -37,7 +37,7 @@ print_ascii "MaycolAI"
 echo -e "$PurpleAjusta la Escala de la Pantalla para una mejor experiencia...$Reset"
 echo -e "$GreenHecho con amor por SoyMaycol$Reset"
 echo -e "$Yellow$CHARACTER_1 Te pondré Musica ^^"
-mpv --really-quiet --loop https://files.catbox.moe/tmhmm8.mp3 &  
+mpv --really-quiet --loop https://files.catbox.moe/vv6jqt.mp3 &  
 MUSIC_PID=$!
 sleep 2  
 
