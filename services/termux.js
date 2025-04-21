@@ -1,10 +1,7 @@
 const { exec } = require("child_process");
 
 const comandosProhibidos = [
-    "rm", "mv", "cp", "dd", "nano", "vim", "vi", "wget", "curl", "ping",
-    "su", "chmod", "chown", "shutdown", "reboot", "poweroff", "kill", "pkill",
-    "npm", "npx", "yarn", "git", "scp", "ssh", "sshd", "tar", "zip", "unzip",
-    "find", "locate", "cat /proc/cpuinfo", "cat /proc/meminfo", "ifconfig", "ip a"
+    "rm"
 ];
 
 async function ejecutarTermux(socket, from, comando) {
