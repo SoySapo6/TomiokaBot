@@ -23,10 +23,6 @@ if ! command -v mpv &> /dev/null; then
     pkg update -y && pkg install mpv -y && clear
 fi
 
-# Reproducir música en bucle y en segundo plano (pero audible)
-mpv --really-quiet --loop https://files.catbox.moe/tmhmm8.mp3 &  
-MUSIC_PID=$!
-
 # Presentación mágica
 CHARACTER_1="Hanako-kun $Yellow✨"
 CHARACTER_2="Nene Yashiro $Purple♡"
@@ -40,6 +36,9 @@ sleep 2
 print_ascii "MaycolAI"
 echo -e "$PurpleAjusta la Escala de la Pantalla para una mejor experiencia...$Reset"
 echo -e "$GreenHecho con amor por SoyMaycol$Reset"
+echo -e "$Yellow$CHARACTER_1 Te pondré Musica ^^"
+mpv --really-quiet --loop https://files.catbox.moe/tmhmm8.mp3 &  
+MUSIC_PID=$!
 sleep 2  
 
 # Actualización  
