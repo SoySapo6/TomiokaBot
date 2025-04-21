@@ -60,7 +60,8 @@ pip install yt-dlp
 # Clonando repositorio  
 print_ascii "Clonando Repo"  
 echo -e "$Green$CHARACTER_3: Descargando MaycolAI desde los cielos digitales...$Reset"
-git clone https://github.com/SoySapo6/MaycolAI  
+git clone https://github.com/SoySapo6/MaycolAI 
+echo -e "$Yellow$CHARACTER_1: Estamos en medio de la Instalación ♪$Reset"
 
 cd MaycolAI
 curl -s -o Hanako.png https://files.catbox.moe/aml84a.png
@@ -69,7 +70,8 @@ curl -s -o Hanako.png https://files.catbox.moe/aml84a.png
 print_ascii "Dependencias"  
 echo -e "$Yellow$CHARACTER_1: Invocando todos los módulos necesarios...$Reset"
 npm install  
-npm install gemini-chatbot  
+npm install gemini-chatbot
+echo -e "$Yellow$CHARACTER_1: Todo Hecho 🥸$Reset"
 
 # Eliminando sesiones antiguas  
 print_ascii "Limpieza"  
@@ -81,12 +83,11 @@ kill $MUSIC_PID
 
 # Mensaje final  
 clear  
-print_ascii "Instalacion Exitosa"
+print_ascii "SoyMaycol"
 jp2a --color Hanako.png
-echo -e "$PurpleGracias por usar MaycolAI, eres lo máximo <3$Reset"
-echo -e "$GreenPara iniciar el bot, ejecuta manualmente el siguiente comando:$Reset"
+echo -e "$Purple Gracias por usar MaycolAI, eres lo máximo <3$Reset"
+echo -e "$Green Para iniciar el bot, ejecuta manualmente el siguiente comando:$Reset"
 echo -e "$Cyan"
 echo "cd MaycolAI && npm start"
 echo -e "$Reset"
-echo -e "$YellowPulsa Hecho por SoyMaycol 👻$Reset"
 read
