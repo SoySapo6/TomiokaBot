@@ -13,7 +13,7 @@ const descargarVideo = async (query) => {
         const outputPath = `${outputDir}/${Date.now()}.mp4`;
         
         // Comando de yt-dlp con User-Agent personalizado
-        const command = `yt-dlp --user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36" -f bestaudio+bestaudio/best -o "${outputPath}" "ytsearch:${query}"`;
+        const command = `yt-dlp --user-agent "User Agent: Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Mobile Safari/537.36" -f bestaudio+bestaudio/best -o "${outputPath}" "ytsearch:${query}"`;
         
         // Ejecuta el comando para descargar el video
         exec(command, (error, stdout, stderr) => {
