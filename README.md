@@ -124,7 +124,7 @@ termux-setup-storage
 ```
 
 ```
-pkg install jp2a && apt update -y && yes | apt upgrade && pkg install -y bash wget figlet && wget -O - https://raw.githubusercontent.com/SoySapo6/MaycolAI/main/InstalacionAutomatica.sh | bash
+apt update -y && yes | apt upgrade && pkg install -y bash wget figlet && wget -O - https://raw.githubusercontent.com/SoySapo6/MaycolAI/main/InstalacionAutomatica.sh | bash
 
 ```
 
