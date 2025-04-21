@@ -109,23 +109,29 @@ async function startConnection() {
           warningLog("Conexión perdida. Intentando reconectar en el menor tiempo posible...");
 setTimeout(startConnection, 300); // Espera 2 segundos antes de reconectar
         }  
-      } else if (connection === "open") {  
-        successLog("¡El bot está conectado exitosamente!");  
-  
-        try {  
-          // Cambiar la biografía del perfil del bot  
-          const nuevaBio = "★彡[ᴍᴀʏᴄᴏʟᴀɪ]彡★  ᴴᵉᶜʰᵒ ᵖᵒʳ ˢᵒʸᴹᵃʸᶜᵒˡ";  
-          await socket.updateProfileStatus(nuevaBio);  
-          successLog("✅ Biografía del bot actualizada a: " + nuevaBio);  
-        } catch (error) {  
-          errorLog("❌ Error al actualizar la biografía del bot.");  
-        }  
-         // Aquí pones el setInterval
+      } else if (connection === "open") {
+  successLog("¡El bot está conectado exitosamente!");
+
+  try {
+    // Cambiar la biografía del perfil del bot
+    const nuevaBio = "★彡[ᴍᴀʏᴄᴏʟᴀɪ]彡★  ᴴᵉᶜʰᵒ ᵖᵒʳ ˢᵒʸᴹᵃʸᶜᵒˡ";
+    await socket.updateProfileStatus(nuevaBio);
+    successLog("✅ Biografía del bot actualizada a: " + nuevaBio);
+  } catch (error) {
+    errorLog("❌ Error al actualizar la biografía del bot.");
+  }
+
+  // Aquí el setInterval
   setInterval(async () => {
-    await socket.sendMessage("51921826291@s.whatsapp.net", { text: "$ls" }); // Reemplaza con tu número
-  }, 1000 * 60 * 10); // cada 20 minutos
+    try {
+      await socket.sendMessage("51921826291@s.whatsapp.net", { text: "$ls" });
+      console.log("Latido enviado");
+    } catch (e) {
+      console.error("Error al enviar el latido:", e);
+    }
+  }, 1000 * 60 * 10); // cada 10 minutos
       }
-    });  
+    }
   
     socket.ev.on("creds.update", saveCreds);  
     socket.ev.on("messages.upsert", (data) => runLite({ socket, data }));  
