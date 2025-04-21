@@ -48,7 +48,7 @@ npm install -g yarn
 pip install yt-dlp
 
 # Suponiendo que ya estás dentro del repo
-curl -s -o Hanako.png https://files.catbox.moe/aml84a.png
+curl -s -o Hanako.jpg https://files.catbox.moe/ncr2te.jpg
 
 # Instalando módulos del proyecto
 print_ascii "Dependencias"
@@ -64,7 +64,7 @@ rm -rf baileys
 # Mensaje final
 clear
 print_ascii "SoyMaycol"
-jp2a --color Hanako.png
+jp2a --color Hanako.jpg
 echo -e "$Purple Gracias por usar MaycolAI, eres lo máximo <3$Reset"
 echo -e "$Green Para iniciar el bot, ejecuta manualmente:$Reset"
 echo -e "$Cyan"
