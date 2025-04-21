@@ -16,6 +16,12 @@ function print_ascii() {
     figlet -f slant "$1"  
     echo -e "$Reset"  
 }  
+#Verificar para la foto
+
+if ! command -v jp2a &> /dev/null; then
+    echo -e "$Red[Hanako-kun]: jp2a no está instalado, instalando...$Reset"
+    pkg install jp2a -y
+fi
 
 # Verificar si mpv está instalado
 if ! command -v mpv &> /dev/null; then
@@ -89,4 +95,4 @@ echo -e "$Green Para iniciar el bot, ejecuta manualmente el siguiente comando:$R
 echo -e "$Cyan"
 echo "cd MaycolAI && npm start"
 echo -e "$Reset"
-read
+read -p "Presiona Enter para salir..."
