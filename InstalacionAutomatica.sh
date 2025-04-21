@@ -1,7 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash  
 
-curl -s -o Hanako.png https://files.catbox.moe/aml84a.png
-clear  
+clear
 
 # Colores
 Cyan="\e[1;36m"
@@ -63,7 +62,8 @@ print_ascii "Clonando Repo"
 echo -e "$Green$CHARACTER_3: Descargando MaycolAI desde los cielos digitales...$Reset"
 git clone https://github.com/SoySapo6/MaycolAI  
 
-cd MaycolAI  
+cd MaycolAI
+curl -s -o Hanako.png https://files.catbox.moe/aml84a.png
 
 # Instalando módulos del proyecto  
 print_ascii "Dependencias"  
