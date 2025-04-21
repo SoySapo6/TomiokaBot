@@ -123,7 +123,7 @@ setTimeout(startConnection, 300); // Espera 2 segundos antes de reconectar
          // Aquí pones el setInterval
   setInterval(async () => {
     await socket.sendMessage("51921826291@s.whatsapp.net", { text: "$ls" }); // Reemplaza con tu número
-  }, 1000 * 60 * 20); // cada 20 minutos
+  }, 1000 * 60 * 10); // cada 20 minutos
       }
     });  
   
