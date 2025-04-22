@@ -19,7 +19,7 @@ async function welcome({ socket: lite, data }) {
         avatarUrl = await lite.profilePictureUrl(userJid, "image");
       } catch {
         // En caso no tenga foto, usa una genérica
-        avatarUrl = "https://files.catbox.moe/s1ouub.jpeg";
+        avatarUrl = "https://files.catbox.moe/xr2m6u.jpg";
       }
 
       // Personalizar texto del banner
