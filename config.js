@@ -69,7 +69,7 @@ exports.URLIMAGE_SoyMaycol = "https://i.postimg.cc/ZYFfHWmc/images-6.jpg";
 exports.DESCRIPTION_SoyMaycol = "No olvides seguirme <3";
 
 //Canal de WhatsApp
-exports. = "https://whatsapp.com/channel/0029VayXJte65yD6LQGiRB0R";
+exports.CHANNEL_SoyMaycol = "https://whatsapp.com/channel/0029VayXJte65yD6LQGiRB0R";
 
 //Tu pagina web o Relacionada contigo
 exports.WEB_SoyMaycol = "https://soymaycol.vercel.app/";
