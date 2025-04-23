@@ -53,20 +53,24 @@ module.exports = async (conn, from, args) => {
       }
 
       if (connection === "close") {
-        let reason = "Desconocido";
         const statusCode = lastDisconnect?.error?.output?.statusCode;
 
-        if (statusCode) {
-          const reasonName = Object.entries(DisconnectReason).find(([k, v]) => v === statusCode);
-          reason = reasonName ? reasonName[0] : `Código ${statusCode}`;
+        if (statusCode === DisconnectReason.restartRequired) {
+          await conn.sendMessage(from, {
+            text: `🔁 *Subbot vinculado.* Reiniciando para completar la conexión...`
+          });
+          return;
         }
+
+        let reason = "Desconocido";
+        const reasonName = Object.entries(DisconnectReason).find(([k, v]) => v === statusCode);
+        if (reasonName) reason = reasonName[0];
 
         await conn.sendMessage(from, {
           text: `❌ *Subbot desconectado.* Motivo: ${reason}.`
         });
 
-        // Eliminar sesión si fue error real
-        if (statusCode !== DisconnectReason.loggedOut && fs.existsSync(sessionPath)) {
+        if (fs.existsSync(sessionPath)) {
           fs.rmSync(sessionPath, { recursive: true, force: true });
         }
       }
