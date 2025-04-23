@@ -77,6 +77,7 @@ echo -e "$Yellow$CHARACTER_1: Todo Hecho 🥸$Reset"
 print_ascii "Limpieza"  
 echo -e "$Red$CHARACTER_3: Eliminando sesiones pasadas para evitar errores...$Reset"
 rm -rf baileys  
+mkdir temp
 
 # Detener música antes de iniciar el bot
 kill $MUSIC_PID
