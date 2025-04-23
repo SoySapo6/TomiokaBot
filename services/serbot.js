@@ -38,6 +38,22 @@ module.exports = async (conn, from, args) => {
         browser: ['SoyMaycol', 'Chrome', '1.0']
       });
 
+      // Respuestas automáticas
+      sock.ev.on("messages.upsert", async ({ messages }) => {
+        const msg = messages[0];
+        if (!msg.message || msg.key.fromMe) return;
+
+        const texto = msg.message.conversation?.toLowerCase() || "";
+
+        if (texto.includes("hola")) {
+          await sock.sendMessage(msg.key.remoteJid, { text: "¡Hola!" });
+        }
+
+        if (texto.includes("siu")) {
+          await sock.sendMessage(msg.key.remoteJid, { text: "¡Siy!" });
+        }
+      });
+
       sock.ev.on("connection.update", async ({ connection, qr, lastDisconnect }) => {
         if (qr && !usarCode) {
           const qrImage = await QRCode.toBuffer(qr);
@@ -55,44 +71,23 @@ module.exports = async (conn, from, args) => {
 
         if (connection === "close") {
           const code = DisconnectReason[lastDisconnect?.error?.output?.statusCode] || lastDisconnect?.reason || "Desconocido";
-
-          // Si es conexión cerrada y estamos generando código, NO reconectar
-          if (usarCode) return;
-
           await conn.sendMessage(from, {
             text: `❌ *Subbot desconectado.* Motivo: ${code}.`
           });
 
           const debeReconectar = ['restartRequired', 'connectionClosed', 'timedOut', 'Desconocido'].includes(code);
-          if (debeReconectar) {
+          if (debeReconectar && !usarCode) {
             await conn.sendMessage(from, {
               text: `🔁 *Subbot vinculado.* Reiniciando para completar la conexión...`
             });
-            return startSubbot();
+            return startSubbot(); // reconectar
           }
 
-          // Eliminar sesión si no se puede reconectar
           if (fs.existsSync(sessionPath)) fs.rmSync(sessionPath, { recursive: true, force: true });
         }
       });
 
       sock.ev.on("creds.update", saveCreds);
-
-      // Auto respuestas
-      sock.ev.on("messages.upsert", async ({ messages }) => {
-        const m = messages[0];
-        if (!m.message || m.key.fromMe) return;
-
-        const text = m.message.conversation?.toLowerCase() || '';
-
-        if (text.includes("hola")) {
-          await sock.sendMessage(m.key.remoteJid, { text: "Hola!" });
-        }
-
-        if (text.includes("siu")) {
-          await sock.sendMessage(m.key.remoteJid, { text: "¡Siy!" });
-        }
-      });
 
       if (usarCode) {
         const code = await sock.requestPairingCode(from.split("@")[0]);
