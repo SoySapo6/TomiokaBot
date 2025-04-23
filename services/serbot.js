@@ -9,7 +9,8 @@ const {
   useMultiFileAuthState,
   DisconnectReason,
   fetchLatestBaileysVersion,
-  makeCacheableSignalKeyStore
+  makeCacheableSignalKeyStore,
+  getContentType
 } = baileys;
 
 module.exports = async (conn, from, args) => {
@@ -43,13 +44,12 @@ module.exports = async (conn, from, args) => {
         const msg = messages[0];
         if (!msg.message || msg.key.fromMe) return;
 
-        const texto = msg.message.conversation?.toLowerCase() || "";
+        const tipo = getContentType(msg.message);
+        const texto = msg.message[tipo]?.text?.toLowerCase() || '';
 
         if (texto.includes("hola")) {
           await sock.sendMessage(msg.key.remoteJid, { text: "¡Hola!" });
-        }
-
-        if (texto.includes("siu")) {
+        } else if (texto.includes("siu")) {
           await sock.sendMessage(msg.key.remoteJid, { text: "¡Siy!" });
         }
       });
@@ -75,14 +75,19 @@ module.exports = async (conn, from, args) => {
             text: `❌ *Subbot desconectado.* Motivo: ${code}.`
           });
 
-          const debeReconectar = ['restartRequired', 'connectionClosed', 'timedOut', 'Desconocido'].includes(code);
-          if (debeReconectar && !usarCode) {
+          const reconectar = ['restartRequired', 'connectionClosed', 'timedOut', 'Desconocido'].includes(code);
+
+          // No reconectar ni borrar sesión si estamos en modo código
+          if (usarCode) return;
+
+          if (reconectar) {
             await conn.sendMessage(from, {
               text: `🔁 *Subbot vinculado.* Reiniciando para completar la conexión...`
             });
             return startSubbot(); // reconectar
           }
 
+          // Borrar sesión solo si no está en modo code
           if (fs.existsSync(sessionPath)) fs.rmSync(sessionPath, { recursive: true, force: true });
         }
       });
@@ -94,6 +99,8 @@ module.exports = async (conn, from, args) => {
         await conn.sendMessage(from, {
           text: `🔐 *Código generado:*\n\n${code}`
         });
+        // No hacer nada más, esperamos que el usuario vincule
+        return;
       }
     };
 
