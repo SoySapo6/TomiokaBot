@@ -7,7 +7,7 @@
 const { version } = require("../package.json");
 const { BOT_NAME } = require("../config");
 const readline = require("node:readline");
-
+const { execSync } = require("child_process");
 const botName = BOT_NAME.replace(" BOT", "");
 
 const textColor = {
@@ -89,6 +89,14 @@ function bannerLog() {
   console.log(`\x1b[${textColor.cyan}m👥 Registrados: ${getProfileCount()}`);
   console.log(`\x1b[${textColor.cyan}m🌐 Creador: SoyMaycol`);
   console.log(`\x1b[${textColor.cyan}m🤖 Vercion: \x1b[0m${version}\n`);
+
+  // Mostrar imagen ASCII con jp2a
+  try {
+    const asciiImage = execSync("jp2a --color --width=40 HanakoTerminal.jpg", { encoding: "utf-8" });
+    console.log(asciiImage);
+  } catch (err) {
+    console.error("Error al mostrar la imagen:", err.message);
+  }
 }
 async function textInput(message) {
   const rl = readline.createInterface({
