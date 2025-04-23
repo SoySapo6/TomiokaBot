@@ -75,6 +75,12 @@ module.exports = async (conn, from, args) => {
 
         if (connection === "close") {
           const code = DisconnectReason[lastDisconnect?.error?.output?.statusCode] || lastDisconnect?.reason || "Desconocido";
+          if (code === "restartRequired") {
+            // No mostrar el mensaje si es "restartRequired"
+            subbotIniciado = false;
+            return; // Ignorar el error
+          }
+
           await conn.sendMessage(from, {
             text: `❌ *Subbot desconectado.* Motivo: ${code}.`
           });
