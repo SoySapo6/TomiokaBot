@@ -1,5 +1,5 @@
 // services/AdReply.js
-const config = require("./config");
+const config = require("../config");
 
 function getAdReplyScript(title, body, thumbnailUrl, mediaUrl) {
     return {
