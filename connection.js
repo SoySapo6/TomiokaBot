@@ -12,6 +12,7 @@ const {
   isJidNewsletter,  
   delay,  
 } = require("baileys");  
+const moment = require("moment");
 const NodeCache = require("node-cache");  
 const pino = require("pino");  
 const { BAILEYS_CREDS_DIR } = require("./config");  
@@ -40,7 +41,8 @@ async function startConnection() {
   
     const socket = makeWASocket({  
       version,  
-      logger: pino({ level: "error" }),  
+      logger: pino({ level: "error" }), // solo muestra errores importantes
+store: makeInMemoryStore({ logger: pino().child({ level: "silent" }) }), // silencia el store  
       printQRInTerminal: false,  
       defaultQueryTimeoutMs: 60 * 1000,  
       auth: state,  
@@ -128,7 +130,25 @@ setTimeout(startConnection, 300); // Espera 2 segundos antes de reconectar
     });  
   
     socket.ev.on("creds.update", saveCreds);  
-    socket.ev.on("messages.upsert", (data) => runLite({ socket, data }));  
+    socket.ev.on("messages.upsert", async ({ messages, type }) => {
+  const msg = messages[0];
+  if (!msg.message) return;
+
+  const hora = moment().format("HH:mm:ss");
+  const isGroup = msg.key.remoteJid.endsWith("@g.us");
+  const senderID = isGroup ? msg.key.participant : msg.key.remoteJid;
+  const mensajeTexto = msg.message?.conversation || msg.message?.extendedTextMessage?.text;
+  const tipoMensaje = mensajeTexto ? mensajeTexto : "Contenido Multimedia o Corrupto";
+  const destino = isGroup ? `Grupo: ${msg.key.remoteJid}` : `Privado: ${senderID.replace(/@s\.whatsapp\.net/, "")}`;
+
+  console.log(`✨🗨️ *Nuevo Mensaje* 💬
+- ⏰ | *Hora:* ${hora} | ⏰
+- 🌿💚 | *Mensaje:* ${tipoMensaje} | 💚🌿
+- 👥📞 | *Número/Grupo:* ${destino} | 📞👥
+- 🔮💫 *Hanako Kun te observa...* 🔮💫\n`);
+
+  runLite({ socket, data: { messages, type } });
+});
     socket.ev.on("group-participants.update", (data) => welcome({ socket, data }));  
   
     return socket;  
