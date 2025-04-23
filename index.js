@@ -1098,12 +1098,13 @@ case "reg":
 • Edad terrenal: *${edad}*
 
 ☁️ El sello ha sido marcado...
-¡Bienvenido/a al *Baño Misterioso N°7*!
+¡Bienvenido/a al *_MaycolAI_*!
 
 Ahora formas parte del *Dominio de Hanako*.
 Escribe *.menu* para ver los secretos que puedes descubrir...
 
-"Hey *${nombre}*, quizás estés más cerca de los Siete Misterios de lo que imaginas..."`,
+> Hey *${nombre}*, quizás estés más cerca de los Siete Misterios de lo que imaginas...
+> *_Hecho Por SoyMaycol_*`,
       contextInfo: adReplyReg.contextInfo
     });
   }
