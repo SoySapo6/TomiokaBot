@@ -643,17 +643,30 @@ await socket.sendMessage(from, { text: "Descargando video... Espere ^^" });
         await socket.sendMessage(from, { text: `❌ Error al descargar: ${error.message || error}` });
     }
     break;
-    case "prueba":
-    await react("✅");  // Agregar una reacción para mayor interactividad
-    await reply("Este es un mensaje de prueba con AdReply.");
+    case "creditos":
+    const config = require("./config");
 
-    // Crear el AdReply con la función importada
-    const adReply = getAdReplyScript();
+    await react("✨"); // Reacción mágica estilo anime
 
-    // Enviar el mensaje con AdReply
+    const adReply = getAdReplyScript(); // AdReply como siempre
+
+    const creditos = `
+╔══✦༺｡ﾟ• Hanako Credits •ﾟ｡༻✦══╗
+║  
+║ ✦ 𝔅𝔬𝔱: ${config.BOT_NAME}
+║ ✦ 𝔠𝔯𝔢𝔞𝔡𝔬 𝔭𝔬𝔯: ${config.OWNER_NAME}
+║ ✦ ℭ𝔬𝔫𝔱𝔞𝔠𝔱𝔬: wa.me/${config.OWNER_NUMBER}
+║ ✦ 𝔈𝔪𝔬𝔧𝔦: ${config.BOT_EMOJI}
+║  
+║ ${config.CREDITS ? `✦ 𝔠𝔬𝔩𝔞𝔟𝔬𝔯𝔞𝔠𝔦𝔬𝔫: ${config.CREDITS}` : "✦ 𝔓𝔯𝔬𝔶𝔢𝔠𝔱𝔬 𝔦𝔫𝔡𝔦𝔳𝔦𝔡𝔲𝔞𝔩"}
+║  
+╚══✦༺☆༻✦══╝`;
+
+    await reply("Invocando los créditos del inframundo...");
+
     await socket.sendMessage(from, {
-        text: "Está es una prueba con AdReply.",
-        contextInfo: adReply.contextInfo  // Incluir el AdReply en el mensaje
+        text: creditos.trim(),
+        contextInfo: adReply.contextInfo
     });
     break;
     case "flux":
