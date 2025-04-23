@@ -70,6 +70,7 @@ print_ascii "Dependencias"
 echo -e "$Yellow$CHARACTER_1: Invocando todos los módulos necesarios...$Reset"
 npm install  
 npm install gemini-chatbot
+npm install moment
 echo -e "$Yellow$CHARACTER_1: Todo Hecho 🥸$Reset"
 
 # Eliminando sesiones antiguas  
