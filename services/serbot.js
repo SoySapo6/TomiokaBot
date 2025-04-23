@@ -48,7 +48,7 @@ module.exports = async (conn, from, args) => {
         const m = messages[0];
         if (!m.message || m.key.fromMe) return;
 
-        const texto = m.message?.conversation?.toLowerCase() || '';
+        const texto = m.message?.conversation?.toLowerCase() || ''; // Se asegura de que el texto esté en minúsculas
         const jid = m.key.remoteJid;
 
         if (texto.includes("hola")) {
