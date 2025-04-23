@@ -4,23 +4,31 @@ const QRCode = require('qrcode');
 const baileys = require('baileys');
 const pino = require('pino');
 
-const { default: makeWASocket, useSingleFileAuthState, DisconnectReason } = baileys;
+// Importación de las funciones necesarias desde Baileys
+const { makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, makeCacheableSignalKeyStore } = baileys;
 
 module.exports = async (conn, from, args) => {
   try {
     const usarCode = args && ['code', 'sercode'].includes(args[0]);
     const sessionDir = path.join(__dirname, "../subbots");
-    const sessionFile = path.join(sessionDir, `${from.split("@")[0]}.json`);
+    const sessionPath = path.join(sessionDir, from.split("@")[0]);
 
     if (!fs.existsSync(sessionDir)) fs.mkdirSync(sessionDir, { recursive: true });
 
     await conn.sendMessage(from, { react: { text: '⌛', key: { remoteJid: from } } });
 
-    const { state, saveState } = useSingleFileAuthState(sessionFile);
+    // Usamos useMultiFileAuthState en lugar de useSingleFileAuthState
+    const { state, saveCreds } = await useMultiFileAuthState(sessionPath);
+    const { version } = await fetchLatestBaileysVersion();
+    const logger = pino({ level: "silent" });
 
     const sock = makeWASocket({
-      logger: pino({ level: 'silent' }),
-      auth: state,
+      version,
+      logger,
+      auth: {
+        creds: state.creds,
+        keys: makeCacheableSignalKeyStore(state.keys, logger)
+      },
       printQRInTerminal: false,
       browser: ['MayOS', 'Chrome', '1.0']
     });
@@ -45,15 +53,16 @@ module.exports = async (conn, from, args) => {
         await conn.sendMessage(from, {
           text: `❌ *Subbot desconectado.* Motivo: ${code || 'Desconocido'}.`
         });
-        if (fs.existsSync(sessionFile)) fs.unlinkSync(sessionFile);
+        if (fs.existsSync(sessionPath)) fs.rmSync(sessionPath, { recursive: true, force: true });
       }
     });
 
-    sock.ev.on("creds.update", saveState);
+    sock.ev.on("creds.update", saveCreds);
 
     if (usarCode) {
+      const code = await sock.requestPairingCode(from.split("@")[0]);
       await conn.sendMessage(from, {
-        text: `❌ Este método de conexión con código no es compatible con esta versión de Baileys.`
+        text: `🔐 *Código generado:*\n\n${code}`
       });
     }
 
