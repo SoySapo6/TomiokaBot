@@ -71,7 +71,6 @@ store: makeInMemoryStore({ logger: pino().child({ level: "silent" }) }), // sile
         enableTutor = await textInput("¿Deseas un tutorial? s/n : ");  
       } while (!["s", "n"].includes(enableTutor));  
   
-      infoLog("Ingrese su número:");  
   
       const phoneNumber = await textInput("Ingrese su número:");  
   
