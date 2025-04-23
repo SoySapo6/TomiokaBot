@@ -61,3 +61,15 @@ exports.APIKEY_SPEEDHOSTING = "aa18unlhqu"
 //Api de MaycolAI, Consigue tu api aca https://190beda3-e512-49aa-ba31-f763eeb51958-00-1ph16biywerce.worf.repl.co/
 
 exports.APIKEY_MAYCOLAI = "b2f0e299-69d9-484f-9e79-c47d7a90eaa1"
+
+//Imagen en URL Del Bot
+exports.URLIMAGE_SoyMaycol = "https://i.postimg.cc/ZYFfHWmc/images-6.jpg";
+
+//Descripción del Bot
+exports.DESCRIPTION_SoyMaycol = "No olvides seguirme <3";
+
+//Canal de WhatsApp
+exports. = "https://whatsapp.com/channel/0029VayXJte65yD6LQGiRB0R";
+
+//Tu pagina web o Relacionada contigo
+exports.WEB_SoyMaycol = "https://soymaycol.vercel.app/";
