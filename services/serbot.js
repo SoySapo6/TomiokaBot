@@ -35,7 +35,7 @@ module.exports = async (conn, from, args) => {
           keys: makeCacheableSignalKeyStore(state.keys, logger)
         },
         printQRInTerminal: false,
-        browser: ['MayOS', 'Chrome', '1.0']
+        browser: ['SoyMaycol', 'Chrome', '1.0']
       });
 
       sock.ev.on("connection.update", async ({ connection, qr, lastDisconnect }) => {
