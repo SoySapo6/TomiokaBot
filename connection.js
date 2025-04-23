@@ -162,11 +162,15 @@ setTimeout(startConnection, 300); // Espera 2 segundos antes de reconectar
 startConnection();  
   
 // Manejo global de errores para evitar que el bot se cierre  
-process.on("unhandledRejection", (reason, promise) => {  
-  errorLog("Unhandled Promise Rejection:", reason);  
-});  
-  
-process.on("uncaughtException", (error) => {  
-  errorLog("Uncaught Exception:", error);  
+process.on("uncaughtException", function (err) {
+  if (!err.message.includes("No SenderKeyRecord found")) {
+    console.error("Uncaught Exception:", err);
+  }
+});
+
+process.on("unhandledRejection", function (reason) {
+  if (!String(reason).includes("No SenderKeyRecord found")) {
+    console.error("Unhandled Rejection:", reason);
+  }
 });
         
