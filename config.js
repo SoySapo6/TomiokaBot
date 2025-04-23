@@ -31,7 +31,7 @@ exports.ASSETS_DIR = path.resolve(__dirname, "assets");
 exports.TEMP_DIR = path.resolve(__dirname, "temp");
 
 // Diretório de credenciais do Baileys.
-exports.BAILEYS_CREDS_DIR = path.resolve(__dirname, "baileys");
+exports.BAILEYS_CREDS_DIR = path.resolve(__dirname, "MaySessions");
 
 // Timeout em milissegundos por ação (evitar banimento do número).
 exports.TIMEOUT_IN_MILLISECONDS_BY_ACTION = 700;
