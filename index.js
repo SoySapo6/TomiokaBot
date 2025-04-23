@@ -1060,13 +1060,13 @@ case "reg":
   const inputTextreg = args.join(""); // Unir argumentos
 
   if (!inputTextreg.includes(".")) {
-    throw new InvalidParameterError("Formato incorrecto. Usa: !reg Nombre.Edad");
+    throw new InvalidParameterError("Formato incorrecto. Usa: .reg Nombre.Edad");
   }
 
   const [nombre, edad] = inputTextreg.split(".");
 
   if (!nombre || !edad || isNaN(edad)) {
-    throw new InvalidParameterError("Formato incorrecto. Usa: !reg Nombre.Edad");
+    throw new InvalidParameterError("Formato incorrecto. Usa: .reg Nombre.Edad");
   }
 
   const filePath = `perfiles/${nombre}.json`;
@@ -1077,32 +1077,37 @@ case "reg":
   }
 
   if (fs.existsSync(filePath)) {
-    await successReply(`El usuario ${nombre} ya está registrado.`);
+    await successReply(`✖️ El espíritu ${nombre} ya está vinculado al mundo de los vivos...`);
   } else {
     const perfil = { nombre, edad: parseInt(edad) };
     fs.writeFileSync(filePath, JSON.stringify(perfil, null, 2));
 
-    await successReply(`Usuario ${nombre} registrado con éxito.`);
+    await successReply(`✔️ Espíritu ${nombre} invocado con éxito en el Dominio de Hanako.`);
 
-    // Añadir el AdReply
-    let adReplyReg = getAdReplyScript(); // Llama a la función para obtener el AdReply
+    // AdReply
+    let adReplyReg = getAdReplyScript();
 
-    // Enviar las estadísticas con el AdReply
+    // Enviar mensaje temático
     await socket.sendMessage(from, {
-      text: `        Cuenta Registrada!
+      text: `
+┏━━━━━━━━━━━━━━━┓
+┃ ✧  ʜᴀɴᴀᴋᴏ ʀᴇɢɪsᴛʀᴏ ✧ ┃
+┗━━━━━━━━━━━━━━━┛
 
-          Nombre: ${nombre}
-           Edad: ${edad} 
+• Nombre espiritual: *${nombre}*
+• Edad terrenal: *${edad}*
 
-      Bienvenido a la Familia!
-     Hey ${nombre}, Te Quiero <3
+☁️ El sello ha sido marcado...
+¡Bienvenido/a al *Baño Misterioso N°7*!
 
-Usᴀ !ᴍᴇɴᴜ ᴘᴀʀᴀ ᴠᴇʀ ᴇʟ ᴍᴇɴᴜ`,
-      contextInfo: adReplyReg.contextInfo // Adjuntamos el AdReply aquí
+Ahora formas parte del *Dominio de Hanako*.
+Escribe *.menu* para ver los secretos que puedes descubrir...
+
+"Hey *${nombre}*, quizás estés más cerca de los Siete Misterios de lo que imaginas..."`,
+      contextInfo: adReplyReg.contextInfo
     });
   }
   break;
-
   case "raro":
     const porcentaje = Math.floor(Math.random() * 101); // Genera un porcentaje aleatorio entre 0 y 100
     let respuestararo;
