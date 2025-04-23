@@ -61,6 +61,7 @@ npm install moment
 print_ascii "Limpieza"
 echo -e "$Red$CHARACTER_3: Eliminando sesiones pasadas para evitar errores...$Reset"
 rm -rf baileys
+mkdir temp
 
 # Mensaje final
 clear
