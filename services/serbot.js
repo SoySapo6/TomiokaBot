@@ -4,8 +4,13 @@ const QRCode = require('qrcode');
 const baileys = require('baileys');
 const pino = require('pino');
 
-// Importación de las funciones necesarias desde Baileys
-const { makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, makeCacheableSignalKeyStore } = baileys;
+const {
+  makeWASocket,
+  useMultiFileAuthState,
+  DisconnectReason,
+  fetchLatestBaileysVersion,
+  makeCacheableSignalKeyStore
+} = baileys;
 
 module.exports = async (conn, from, args) => {
   try {
@@ -17,7 +22,6 @@ module.exports = async (conn, from, args) => {
 
     await conn.sendMessage(from, { react: { text: '⌛', key: { remoteJid: from } } });
 
-    // Usamos useMultiFileAuthState en lugar de useSingleFileAuthState
     const { state, saveCreds } = await useMultiFileAuthState(sessionPath);
     const { version } = await fetchLatestBaileysVersion();
     const logger = pino({ level: "silent" });
@@ -33,7 +37,7 @@ module.exports = async (conn, from, args) => {
       browser: ['MayOS', 'Chrome', '1.0']
     });
 
-    sock.ev.on("connection.update", async ({ connection, qr }) => {
+    sock.ev.on("connection.update", async ({ connection, qr, lastDisconnect }) => {
       if (qr && !usarCode) {
         const qrImage = await QRCode.toBuffer(qr);
         await conn.sendMessage(from, {
@@ -49,11 +53,22 @@ module.exports = async (conn, from, args) => {
       }
 
       if (connection === "close") {
-        const code = DisconnectReason[sock?.lastDisconnect?.error?.output?.statusCode];
+        let reason = "Desconocido";
+        const statusCode = lastDisconnect?.error?.output?.statusCode;
+
+        if (statusCode) {
+          const reasonName = Object.entries(DisconnectReason).find(([k, v]) => v === statusCode);
+          reason = reasonName ? reasonName[0] : `Código ${statusCode}`;
+        }
+
         await conn.sendMessage(from, {
-          text: `❌ *Subbot desconectado.* Motivo: ${code || 'Desconocido'}.`
+          text: `❌ *Subbot desconectado.* Motivo: ${reason}.`
         });
-        if (fs.existsSync(sessionPath)) fs.rmSync(sessionPath, { recursive: true, force: true });
+
+        // Eliminar sesión si fue error real
+        if (statusCode !== DisconnectReason.loggedOut && fs.existsSync(sessionPath)) {
+          fs.rmSync(sessionPath, { recursive: true, force: true });
+        }
       }
     });
 
