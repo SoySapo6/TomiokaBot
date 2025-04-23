@@ -99,7 +99,7 @@ Simulador de streamer: ¡Enfréntate a **trolls** y **hackeos**!
 
 
 ```
-   git clone https://github.com/SoySapo6/MaycolAI && cd MaycolAI && npm install && npm install gemini-chatbot && rm -rf baileys && npm start
+   git clone https://github.com/SoySapo6/MaycolAI && cd MaycolAI && npm install && npm install gemini-chatbot && npm install moment && rm -rf baileys && npm start
 ```
 4. Listo!
 
