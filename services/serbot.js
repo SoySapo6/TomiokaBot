@@ -22,10 +22,10 @@ module.exports = async (conn, from, args) => {
 
     await conn.sendMessage(from, { react: { text: '⌛', key: { remoteJid: from } } });
 
-    let subbotIniciado = false; // Bandera para evitar bucles
+    let subbotIniciado = false;
 
     const startSubbot = async () => {
-      if (subbotIniciado) return; // No iniciar de nuevo si ya está iniciado
+      if (subbotIniciado) return;
       subbotIniciado = true;
 
       const { state, saveCreds } = await useMultiFileAuthState(sessionPath);
@@ -43,18 +43,26 @@ module.exports = async (conn, from, args) => {
         browser: ['SoyMaycol', 'Chrome', '1.0']
       });
 
-      // Respuestas automáticas
+      // Ahora sí: mensajes automáticos funcionando full
       sock.ev.on('messages.upsert', async ({ messages }) => {
         const m = messages[0];
-        if (!m.message || m.key.fromMe) return;
+        if (!m || !m.message || m.key.fromMe) return;
 
-        const texto = m.message?.conversation?.toLowerCase() || ''; // Se asegura de que el texto esté en minúsculas
+        const tipo = Object.keys(m.message)[0];
+        let texto = '';
+
+        if (tipo === 'conversation') texto = m.message.conversation;
+        else if (tipo === 'extendedTextMessage') texto = m.message.extendedTextMessage.text;
+        else if (tipo === 'imageMessage' && m.message.imageMessage.caption) texto = m.message.imageMessage.caption;
+        else if (tipo === 'videoMessage' && m.message.videoMessage.caption) texto = m.message.videoMessage.caption;
+
+        texto = texto.toLowerCase().trim();
         const jid = m.key.remoteJid;
 
-        if (texto.includes("hola")) {
-          await sock.sendMessage(jid, { text: "Hola!" });
-        } else if (texto.includes("siu")) {
-          await sock.sendMessage(jid, { text: "siy" });
+        if (texto.includes('hola')) {
+          await sock.sendMessage(jid, { text: 'Hola!' });
+        } else if (texto.includes('siu')) {
+          await sock.sendMessage(jid, { text: 'siy' });
         }
       });
 
@@ -74,28 +82,24 @@ module.exports = async (conn, from, args) => {
         }
 
         if (connection === "close") {
-          const code = DisconnectReason[lastDisconnect?.error?.output?.statusCode] || lastDisconnect?.reason || "Desconocido";
-          if (code === "restartRequired") {
-            // No mostrar el mensaje si es "restartRequired"
-            subbotIniciado = false;
-            return; // Ignorar el error
-          }
+          const statusCode = lastDisconnect?.error?.output?.statusCode;
+          const code = DisconnectReason[statusCode] || lastDisconnect?.reason || "Desconocido";
 
-          await conn.sendMessage(from, {
-            text: `❌ *Subbot desconectado.* Motivo: ${code}.`
-          });
+          // Solo mostrar error si NO es restartRequired
+          if (code !== 'restartRequired') {
+            await conn.sendMessage(from, {
+              text: `❌ *Subbot desconectado.* Motivo: ${code}.`
+            });
+          }
 
           const debeReconectar = ['restartRequired', 'connectionClosed', 'timedOut'].includes(code);
 
           if (usarCode) {
-            subbotIniciado = false; // Permitir reiniciar desde fuera si fue desconexión forzada
+            subbotIniciado = false;
             return;
           }
 
           if (debeReconectar) {
-            await conn.sendMessage(from, {
-              text: `🔁 *Subbot vinculado.* Reiniciando para completar la conexión...`
-            });
             subbotIniciado = false;
             return startSubbot();
           }
@@ -121,7 +125,7 @@ module.exports = async (conn, from, args) => {
       }
     };
 
-    await startSubbot(); // Primera ejecución
+    await startSubbot();
 
   } catch (e) {
     await conn.sendMessage(from, {
