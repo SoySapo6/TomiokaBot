@@ -92,7 +92,7 @@ function bannerLog() {
 
   // Mostrar imagen ASCII con jp2a
   try {
-    const asciiImage = execSync("jp2a --color --width=40 HanakoTerminal.jpg", { encoding: "utf-8" });
+    const asciiImage = execSync("jp2a --color --width=40 HanakoTerminal.png", { encoding: "utf-8" });
     console.log(asciiImage);
   } catch (err) {
     console.error("Error al mostrar la imagen:", err.message);
