@@ -341,6 +341,9 @@ case "shutdown":
     await socket.sendMessage(from, { text: 'No se pudo generar la imagen del maestro Oogway.' });
   }
   break;
+      case "serbot":
+    await require("./services/serbot")(socket, from, args);
+    break;
 case "karkat":
     await require("./services/KarKat")(socket, from, args);
     break;
