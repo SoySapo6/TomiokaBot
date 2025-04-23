@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const QRCode = require('qrcode');
-const { default: makeWASocket, DisconnectReason, useMultiFileAuthState, fetchLatestBaileysVersion, makeCacheableSignalKeyStore } = require('@whiskeysockets/baileys');
+const baileys = require('baileys');
 const pino = require('pino');
 
 module.exports = async (conn, from, args) => {
