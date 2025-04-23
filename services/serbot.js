@@ -9,8 +9,7 @@ const {
   useMultiFileAuthState,
   DisconnectReason,
   fetchLatestBaileysVersion,
-  makeCacheableSignalKeyStore,
-  getContentType
+  makeCacheableSignalKeyStore
 } = baileys;
 
 module.exports = async (conn, from, args) => {
@@ -23,7 +22,12 @@ module.exports = async (conn, from, args) => {
 
     await conn.sendMessage(from, { react: { text: '⌛', key: { remoteJid: from } } });
 
+    let subbotIniciado = false; // Bandera para evitar bucles
+
     const startSubbot = async () => {
+      if (subbotIniciado) return; // No iniciar de nuevo si ya está iniciado
+      subbotIniciado = true;
+
       const { state, saveCreds } = await useMultiFileAuthState(sessionPath);
       const { version } = await fetchLatestBaileysVersion();
       const logger = pino({ level: "silent" });
@@ -40,17 +44,17 @@ module.exports = async (conn, from, args) => {
       });
 
       // Respuestas automáticas
-      sock.ev.on("messages.upsert", async ({ messages }) => {
-        const msg = messages[0];
-        if (!msg.message || msg.key.fromMe) return;
+      sock.ev.on('messages.upsert', async ({ messages }) => {
+        const m = messages[0];
+        if (!m.message || m.key.fromMe) return;
 
-        const tipo = getContentType(msg.message);
-        const texto = msg.message[tipo]?.text?.toLowerCase() || '';
+        const texto = m.message?.conversation?.toLowerCase() || '';
+        const jid = m.key.remoteJid;
 
         if (texto.includes("hola")) {
-          await sock.sendMessage(msg.key.remoteJid, { text: "¡Hola!" });
+          await sock.sendMessage(jid, { text: "Hola!" });
         } else if (texto.includes("siu")) {
-          await sock.sendMessage(msg.key.remoteJid, { text: "¡Siy!" });
+          await sock.sendMessage(jid, { text: "siy" });
         }
       });
 
@@ -75,19 +79,21 @@ module.exports = async (conn, from, args) => {
             text: `❌ *Subbot desconectado.* Motivo: ${code}.`
           });
 
-          const reconectar = ['restartRequired', 'connectionClosed', 'timedOut', 'Desconocido'].includes(code);
+          const debeReconectar = ['restartRequired', 'connectionClosed', 'timedOut'].includes(code);
 
-          // No reconectar ni borrar sesión si estamos en modo código
-          if (usarCode) return;
+          if (usarCode) {
+            subbotIniciado = false; // Permitir reiniciar desde fuera si fue desconexión forzada
+            return;
+          }
 
-          if (reconectar) {
+          if (debeReconectar) {
             await conn.sendMessage(from, {
               text: `🔁 *Subbot vinculado.* Reiniciando para completar la conexión...`
             });
-            return startSubbot(); // reconectar
+            subbotIniciado = false;
+            return startSubbot();
           }
 
-          // Borrar sesión solo si no está en modo code
           if (fs.existsSync(sessionPath)) fs.rmSync(sessionPath, { recursive: true, force: true });
         }
       });
@@ -95,16 +101,21 @@ module.exports = async (conn, from, args) => {
       sock.ev.on("creds.update", saveCreds);
 
       if (usarCode) {
-        const code = await sock.requestPairingCode(from.split("@")[0]);
-        await conn.sendMessage(from, {
-          text: `🔐 *Código generado:*\n\n${code}`
-        });
-        // No hacer nada más, esperamos que el usuario vincule
-        return;
+        try {
+          const code = await sock.requestPairingCode(from.split("@")[0]);
+          await conn.sendMessage(from, {
+            text: `🔐 *Código generado:*\n\n${code}`
+          });
+        } catch (e) {
+          await conn.sendMessage(from, {
+            text: `❌ Error al generar código: ${e.message}`
+          });
+          subbotIniciado = false;
+        }
       }
     };
 
-    await startSubbot();
+    await startSubbot(); // Primera ejecución
 
   } catch (e) {
     await conn.sendMessage(from, {
