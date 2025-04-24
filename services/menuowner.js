@@ -79,6 +79,7 @@ ${profileCount}
 👄 ${PREFIX}besar ✦
 😂 ${PREFIX}dog ✦
 🌈 ${PREFIX}simi ✦
+🤬 ${PREFIX}xex ✦
 
 ─────────❖───────── ✎
 
