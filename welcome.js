@@ -22,11 +22,15 @@ async function welcome({ socket: lite, data }) {
         avatarUrl = "https://files.catbox.moe/xr2m6u.jpg";
       }
 
-      const imagePath = path.join(__dirname, "../stickers/welcome.jpg");
+      const dirPath = path.join(__dirname, "../stickers/");
+      if (!fs.existsSync(dirPath)) {
+        fs.mkdirSync(dirPath, { recursive: true });
+      }
+
+      const imagePath = path.join(dirPath, "welcome.jpg");
 
       const apiURL = `http://speedhosting.cloud:5000/api/canva/bem-vindo2?titulo=MaycolAI&avatar=${encodeURIComponent(avatarUrl)}&fundo=https://files.catbox.moe/2xuxna.png&nome=${numero}&desc=Hecho%20Por%20SoyMaycol&apikey=aa18unlhqu`;
 
-      // Ejecutar curl
       exec(`curl "${apiURL}" --output "${imagePath}"`, async (error) => {
         if (error) {
           errorLog("No se pudo generar la imagen de bienvenida con curl.");
@@ -55,7 +59,6 @@ async function welcome({ socket: lite, data }) {
           mentions: [userJid],
         });
 
-        // Eliminar imagen para ahorrar espacio
         fs.unlinkSync(imagePath);
       });
 
