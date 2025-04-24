@@ -32,7 +32,7 @@ Este bot de WhatsApp, basado en **Baileys**, está cargado de funciones impresio
 [![blog](https://img.shields.io/badge/RAP-GataBot_VS_MaycolAI-FF0000?style=for-the-badge&logo=youtube&logoColor=white)
 ](https://youtu.be/HFNhMzYmA5Y?si=SUWcBEY1u3JUMyN1)
 
-[![blog](https://img.shields.io/badge/Primer_Canal-SoyMaycol-FF0000?style=for-the-badge&logo=youtube&logoColor=white)
+[![blo](https://img.shields.io/badge/Primer_Canal-SoyMaycol-FF0000?style=for-the-badge&logo=youtube&logoColor=white)
 ](https://www.youtube.com/@Palito-100)
 
 [![blog](https://img.shields.io/badge/Segundo_Canal-SoyMaycol-FF0000?style=for-the-badge&logo=youtube&logoColor=white)
