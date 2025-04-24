@@ -63,7 +63,7 @@ const { descargarVideo } = require("./services/Youtubedescarga");
 const { buscarEnYoutube } = require("./services/Youtube");
 const { chat } = require("./services/Gemini.js");
 const path = require("node:path");
-const { ASSETS_DIR, BOT_NUMBER, SPIDER_API_TOKEN, API_darkstartsz, NAME_darkstartsz } = require("./config");
+const { MENUIMAGE_SoyMaycol, ASSETS_DIR, BOT_NUMBER, SPIDER_API_TOKEN, API_darkstartsz, NAME_darkstartsz } = require("./config");
 const { errorLog } = require("./utils/terminal");
 const {
   attp,
