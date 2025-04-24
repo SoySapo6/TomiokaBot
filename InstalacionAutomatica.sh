@@ -33,7 +33,7 @@ echo -e "$Purple$CHARACTER_2: ¡Hora de instalar algo genial!"
 echo -e "$Green$CHARACTER_3: ¡Vamos, que esto será rápido y fácil!$Reset"
 sleep 2
 
-print_ascii "MaycolAI"
+print_ascii "TomiokaBot"
 echo -e "$PurpleAjusta la Escala de la Pantalla para una mejor experiencia...$Reset"
 echo -e "$GreenHecho con amor por SoyMaycol$Reset"
 echo -e "$Yellow$CHARACTER_1 Te pondré Musica ^^"
@@ -59,11 +59,11 @@ pip install yt-dlp
 # Clonando repositorio  
 print_ascii "Clonando Repo"  
 echo -e "$Green$CHARACTER_3: Descargando MaycolAI desde los cielos digitales...$Reset"
-git clone https://github.com/SoySapo6/MaycolAI 
+git clone https://github.com/SoySapo6/TomiokaBot.git
 echo -e "$Yellow$CHARACTER_1: Estamos en medio de la Instalación ♪$Reset"
 
 cd MaycolAI
-curl -s -o Hanako.png https://files.catbox.moe/aml84a.png
+curl -s -o Hanako.png https://i.postimg.cc/k5cx3QxV/Giyu-Tomioka-Manga.png
 
 # Instalando módulos del proyecto  
 print_ascii "Dependencias"  
@@ -88,9 +88,9 @@ kill $MUSIC_PID
 clear  
 print_ascii "SoyMaycol"
 jp2a --color Hanako.png
-echo -e "$Purple Gracias por usar MaycolAI, eres lo máximo <3$Reset"
+echo -e "$Purple Gracias por usar TomiokaBot, eres lo máximo <3$Reset"
 echo -e "$Green Para iniciar el bot, ejecuta manualmente el siguiente comando:$Reset"
 echo -e "$Cyan"
-echo "cd MaycolAI && npm start"
+echo "cd TomiokaBot && npm start"
 echo -e "$Reset"
 read -p "Presiona Enter para salir..."
