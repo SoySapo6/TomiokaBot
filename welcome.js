@@ -1,47 +1,38 @@
-const { exec } = require("child_process");
-const fs = require("fs");
-const path = require("path");
+const axios = require("axios"); const { onlyNumbers } = require("./utils/functions"); const { isActiveWelcomeGroup } = require("./database/db"); const { errorLog } = require("./utils/terminal");
 
-const { onlyNumbers } = require("./utils/functions");
-const { isActiveWelcomeGroup } = require("./database/db");
-const { errorLog } = require("./utils/terminal");
+async function welcome({ socket: lite, data }) { const from = data.id; const userJid = data.participants[0];
 
-async function welcome({ socket, data }) {
-  const from = data.id;
-  const userJid = data.participants[0];
+if (!isActiveWelcomeGroup(from)) return;
 
-  if (!isActiveWelcomeGroup(from)) return;
-  if (data.action !== "add") return;
+if (data.action === "add") { try { const numero = onlyNumbers(userJid);
 
-  const numero = onlyNumbers(userJid);
-  let avatarUrl = "https://files.catbox.moe/xr2m6u.jpg";
-
+// Obtener la foto real de perfil usando Baileys
+  let avatarUrl;
   try {
-    avatarUrl = await socket.profilePictureUrl(userJid, "image");
-  } catch {}
-
-  const dir = path.join(__dirname, "../stickers/");
-  const outputPath = path.join(dir, "welcome.jpg");
-
-  // Crear carpeta si no existe
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
+    avatarUrl = await lite.profilePictureUrl(userJid, "image");
+  } catch {
+    // En caso no tenga foto, usa una genérica
+    avatarUrl = "https://files.catbox.moe/xr2m6u.jpg";
   }
 
-  const apiUrl = `http://speedhosting.cloud:5000/api/canva/bem-vindo2?titulo=MaycolAI&avatar=${encodeURIComponent(avatarUrl)}&fundo=https://files.catbox.moe/2xuxna.png&nome=${numero}&desc=Hecho%20Por%20SoyMaycol&apikey=aa18unlhqu`;
+  // Personalizar texto del banner
+  const text1 = "MaycolAI";
+  const text2 = "De Parte de SoyMaycol ^^";
+  const text3 = `Member ${numero}`;
 
-  exec(`curl -L "${apiUrl}" --output "${outputPath}"`, async (err) => {
-    if (err) {
-      errorLog("Fallo al descargar imagen de bienvenida.");
-      console.log(err.message);
-      return;
-    }
+  // Crear URL de Popcat con los textos personalizados
+  const popcatUrl = `https://api.popcat.xyz/welcomecard?background=https://cdn.popcat.xyz/welcome-bg.png&text1=${encodeURIComponent(text1)}&text2=${encodeURIComponent(text2)}&text3=${encodeURIComponent(text3)}&avatar=${encodeURIComponent(avatarUrl)}`;
 
-    try {
-      const buffer = fs.readFileSync(outputPath);
-      await socket.sendMessage(from, {
-        image: buffer,
-        caption: `┏━━━━━━━━━━━✦  
+  const response = await axios.get(popcatUrl, {
+    responseType: "arraybuffer",
+    timeout: 15000,
+  });
+
+  const buffer = Buffer.from(response.data, "binary");
+
+  await lite.sendMessage(from, {
+    image: buffer,
+    caption: `┏━━━━━━━━━━━✦  
 ┃✧  ʜᴏʟᴀ ~ @${numero}
 ┃✧  ᴛᴇ ᴅᴀ ʟᴀ ʙɪᴇɴᴠᴇɴɪᴅᴀ…  
 ┃✧  ᴇʟ ʙᴏᴛ ᴅᴇ ʜᴀɴᴀᴋᴏ-ᴋᴜɴ  
@@ -54,15 +45,6 @@ async function welcome({ socket, data }) {
 ➤ ✧ ᴍɪɴɪ ᴊᴜᴇɢᴏꜱ, ᴍᴀꜱᴄᴏᴛᴀꜱ, ʏ ᴍᴀ́ꜱ!
 
 ꜱɪᴇɴᴛᴇᴛᴇ ᴄᴏ́ᴍᴏᴅ@ ʏ ᴅɪꜱꜰʀᴜᴛᴀ ~  
-☁️ ᴍᴀʏᴄᴏʟᴀɪ & ʜᴀɴᴀᴋᴏ ᴛᴇ ᴄᴜɪᴅᴀɴ ☁️`,
-        mentions: [userJid],
-      });
-      fs.unlinkSync(outputPath);
-    } catch (e) {
-      errorLog("Error al enviar o leer la imagen.");
-      console.log(e.message);
-    }
-  });
-}
+☁️ ᴍᴀʏᴄᴏʟᴀɪ & ʜᴀɴᴀᴋᴏ ᴛᴇ ᴄᴜɪᴅᴀɴ ☁️`, mentions: [userJid], }); } catch (error) { errorLog("Alguien se unió al grupo y no pude enviar el mensaje de bienvenida."); console.error(error.message); } } }
 
 module.exports = { welcome };
