@@ -479,25 +479,37 @@ case "qrsticker":
 
         await reply("Bueno, yo hice mi trabajo.");
         break;
- case 'tiktok':
-case 'tt':
-  if (!text) return m.reply('📌 Por favor, envíame el enlace de un video de TikTok.')
-  if (!text.includes('tiktok.com')) return m.reply('❌ Ese no parece un enlace de TikTok válido.')
+ case "tiktok":
+case "tt":
+  if (!args[0]) {
+    await socket.sendMessage(from, { text: '📌 Envía el enlace de un video de TikTok para descargar.' });
+    break;
+  }
+
+  if (!args[0].includes("tiktok.com")) {
+    await socket.sendMessage(from, { text: '❌ Ese no parece un enlace válido de TikTok.' });
+    break;
+  }
 
   try {
-    m.react('⏳') // Reacción mientras carga
+    await socket.sendMessage(from, { text: '⏳ Descargando video de TikTok...' });
 
-    let url = `https://tikwm.com/api/?url=${encodeURIComponent(text)}`
-    let res = await fetch(url)
-    let json = await res.json()
+    const res = await fetch(`https://api.tiklydown.me/api/download?url=${encodeURIComponent(args[0])}`);
+    const json = await res.json();
 
-    if (!json.data || !json.data.play) return m.reply('⚠️ No se pudo descargar el video.')
+    if (!json || !json.data || !json.data.video) {
+      await socket.sendMessage(from, { text: '⚠️ No se pudo descargar el video.' });
+      break;
+    }
 
-    await conn.sendFile(m.chat, json.data.play, 'tiktok.mp4', `✅ *Video descargado con éxito*\n\n🎵 *Audio:* ${json.data.music.title || 'No disponible'}\n👤 *Autor:* ${json.data.author.nickname}`, m)
+    await socket.sendMessage(from, {
+      video: { url: json.data.video },
+      caption: `✅ Video descargado con éxito.\n\n🎵 *Audio:* ${json.data.music || 'Desconocido'}\n👤 *Autor:* ${json.data.author || 'Desconocido'}`
+    });
 
   } catch (e) {
-    console.error(e)
-    m.reply('❌ Ocurrió un error al procesar el enlace.')
+    console.error(e);
+    await socket.sendMessage(from, { text: '❌ Ocurrió un error al intentar descargar el video.' });
   }
   break;
       case "cep":
