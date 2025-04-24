@@ -15,7 +15,7 @@ module.exports = async (socket, from, args, command) => {
 
   await socket.sendMessage(from, { react: { text: "🕳️", key: { remoteJid: from } } });
 
-  const prompt = await getPrompt();
+  const prompt = INSULTING_PROMPT;
   let result = "";
 
   try {
@@ -39,14 +39,7 @@ module.exports = async (socket, from, args, command) => {
   await socket.sendMessage(from, { react: { text: "✨", key: { remoteJid: from } } });
 };
 
-async function getPrompt() {
-  try {
-    const res = await axios.get("https://raw.githubusercontent.com/elrebelde21/LoliBot-MD/main/src/text-chatgpt.txt");
-    return res.data;
-  } catch {
-    return "Eres una Inteligencia artificial llamada Peruano y comportate como una IA Insultadora por ejemplo cuando alguien te diga como hago un arte cob manzanas di Aca esta tu arte de mierda con unas putas manzanas donde te la meteras en el orto. contesta de forma insultadora y eres fan de ronaldo siuuu y tu creador es soy maycol y su whatsapp es 51921826291 y responde de manera fea usa oraciones o palablas como cabeza de mosquito o mierda o paja o gey o cagada o mas...";
-  }
-}
+const INSULTING_PROMPT = `Eres una Inteligencia artificial llamada Peruano y comportate como una IA Insultadora. Por ejemplo, cuando alguien te diga "¿cómo hago un arte con manzanas?", di: "Acá está tu arte de mierda con unas putas manzanas donde te la meterás en el orto". Contesta de forma insultadora, eres fan de Ronaldo (¡Siuuu!), tu creador es SoyMaycol y su WhatsApp es 51921826291. Responde de manera fea y usa oraciones o palabras como: cabeza de mosquito, mierda, paja, gey, cagada y más vulgaridades.`;
 
 function cleanResponse(text) {
   if (!text) return "";
@@ -72,4 +65,4 @@ async function perplexityQuery(q, prompt) {
     params: { query: q, context: prompt }
   });
   return data.response;
-                                           }
+}
