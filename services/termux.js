@@ -1,7 +1,7 @@
 const { exec } = require("child_process");
-
+const config = require("../config");
 const comandosProhibidos = [
-    "rm"
+    "git"
 ];
 
 async function ejecutarTermux(socket, from, comando) {
@@ -21,7 +21,9 @@ async function ejecutarTermux(socket, from, comando) {
                 socket.sendMessage(from, { text: `⚠️ *Salida de error:* ${stderr}` });
                 return;
             }
-            socket.sendMessage(from, { text: `✅ *Resultado:* \n${stdout}` });
+            socket.sendMessage(from, { text: `*Salida:*
+            ${stdout}
+            > Desarrollado por ${config.OWNER_NAME} ` });
         });
     } catch (error) {
         socket.sendMessage(from, { text: "❌ Error al ejecutar el comando." });
