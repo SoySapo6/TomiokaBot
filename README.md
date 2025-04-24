@@ -1,13 +1,13 @@
 ---
 
-[![blog](https://files.catbox.moe/s8g2i4.png)
+[![blog](https://i.postimg.cc/4ddCg1hn/descarga.jpg)
 ](https://soymaycol.itch.io/)
 <p align="center">
 <a href="#"><img title="GataBot-MD" src="https://img.shields.io/badge/Deja tu ⭐ Para darme motivos de Seguir ^^ -red?colorA=%255ff0000&colorB=%23017e40&style=for-the-badge"></a> 
 <img src="https://i.postimg.cc/W1P24C13/descarga-24.jpg" height="28px">
 </p>  
 
-🌟 ¡Bienvenido a **MaycolAI**! 🌟  
+🌟 ¡Bienvenido a **TomiokaBot**! 🌟  
 Este bot de WhatsApp, basado en **Baileys**, está cargado de funciones impresionantes, simuladores locos y un montón de comandos útiles. 😎
 
 ---
@@ -40,7 +40,7 @@ Este bot de WhatsApp, basado en **Baileys**, está cargado de funciones impresio
 
 ---
 
-## 🔥 **Funciones de MaycolAI** 🔥
+## 🔥 **Funciones de TomiokaBot** 🔥
 
 💻 **¡Ejecuta código en múltiples lenguajes!**  
 Ejecuta **JavaScript**, **Python**, **C**, **C++**, **Java** y más con comandos personalizados.
@@ -80,36 +80,11 @@ Simulador de streamer: ¡Enfréntate a **trolls** y **hackeos**!
 - **Node.js 18+**
 - **Git**
 
-### 🔧 **Pasos de instalación**:
-
-1. **Configura el almacenamiento**:
-
-   
-```
-   termux-setup-storage
-```
-
-2. Instala las dependencias necesarias:
-
-```
-    pkg upgrade -y && pkg update -y && pkg install git -y && pkg install nodejs-lts -y && pkg install ffmpeg -y && npm install -g yarn && pkg install python-pip && pip install yt-dlp
-```
-
-3. Clona el repositorio:
-
-
-```
-   git clone https://github.com/SoySapo6/MaycolAI && cd MaycolAI && npm install && npm install gemini-chatbot && npm install moment && rm -rf baileys && npm start
-```
-4. Listo!
-
----
-
 # En Caso de Apagarse
 Sirve en los dos Metodos
 
 ```
-cd MaycolAI && npm start
+cd TomiokaBot && npm start
 
 ```
 
@@ -124,7 +99,7 @@ termux-setup-storage
 ```
 
 ```
-pkg install jp2a -y && apt update -y && yes | apt upgrade && pkg install -y bash wget figlet && wget -O - https://raw.githubusercontent.com/SoySapo6/MaycolAI/main/InstalacionAutomatica.sh | bash
+pkg install jp2a -y && apt update -y && yes | apt upgrade && pkg install -y bash wget figlet && wget -O - https://raw.githubusercontent.com/SoySapo6/TomiokaBot/main/InstalacionAutomatica.sh | bash
 
 ```
 
@@ -132,7 +107,7 @@ pkg install jp2a -y && apt update -y && yes | apt upgrade && pkg install -y bash
 
 # **CodeSpaces 🚀**
 
-[![Abrir en GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?skip_quickstart=true&machine=basicLinux32gb&repo=SoySapo6/MaycolAI&ref=main&geo=UsEast)
+[![Abrir en GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?skip_quickstart=true&machine=basicLinux32gb&repo=SoySapo6/TomiokaBot&ref=main&geo=UsEast)
 
 **Comando:**
 
@@ -153,9 +128,9 @@ sudo apt update -y && sudo apt upgrade -y && sudo apt install -y bash wget figle
 <p>Por si algo sale mal ^^</p>
 
 <div align="center">
-  <a href="https://api.whatsapp.com/send/?phone=+51921826291&text=Hola%20👋%20soporte%20de%20Maycol%20AI&type=phone_number&app_absent=0" target="blank"><img src="https://img.shields.io/badge/Whatsapp-30302f?style=flat&logo=whatsapp" alt="WhatsApp" /></a>  
+  <a href="https://api.whatsapp.com/send/?phone=+51921826291&text=Hola%20👋%20soporte%20de%20TomiokaBot&type=phone_number&app_absent=0" target="blank"><img src="https://img.shields.io/badge/Whatsapp-30302f?style=flat&logo=whatsapp" alt="WhatsApp" /></a>  
   <a href="http://www.instagram.com/SoyMaycol" target="blank"><img src="https://img.shields.io/badge/Instagram-30302f?style=flat&logo=instagram" alt="Instagram" /></a>  
-  <a href="https://github.com/SoySapo6/MaycolAI/watchers"><img title="Espectadores" src="https://img.shields.io/github/watchers/SoySapo6/MaycolAI?label=Espectadores&style=social" alt="Espectadores" /></a>  
+  <a href="https://github.com/SoySapo6/TomiokaBot/watchers"><img title="Espectadores" src="https://img.shields.io/github/watchers/SoySapo6/TomiokaBot?label=Espectadores&style=social" alt="Espectadores" /></a>  
 </div>
 
 <div align="center">
@@ -168,12 +143,8 @@ sudo apt update -y && sudo apt upgrade -y && sudo apt install -y bash wget figle
 
 🎩 Creador: SoyMaycol
 
-🤖 ChatGPT es Sigma: El Sigma del Proyecto
-
-😎 Ado: Me ayudó con la idea
-
-[![blog](https://img.shields.io/badge/Base_Utilizada:-Lite_Bot-FFFFFF?style=for-the-badge&logo=github&logoColor=black)
-](https://github.com/guiireal/lite-bot)
+[![blog](https://img.shields.io/badge/Base_Utilizada:-MaycolAI-FFFFFF?style=for-the-badge&logo=github&logoColor=black)
+](https://github.com/SoySapo6/MaycolAI/)
 
 Nota: Muchas Gracias me ayudo la base ^^
 
