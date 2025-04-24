@@ -2,9 +2,8 @@ const axios = require("axios");
 const { getAdReplyScript } = require("./AdReply");
 const config = require("../config");
 
-module.exports = async (socket, from, msg, args, command) => {
+module.exports = async (socket, from, args, command) => {
   const text = args.join(" ");
-  const name = msg.pushName || "Invocador";
   const adReply = getAdReplyScript();
 
   if (!text) {
@@ -14,13 +13,13 @@ module.exports = async (socket, from, msg, args, command) => {
     });
   }
 
-  await socket.sendMessage(from, { react: { text: "🕳️", key: msg.key } });
+  await socket.sendMessage(from, { react: { text: "🕳️", key: { remoteJid: from } } });
 
   const prompt = await getPrompt();
   let result = "";
 
   try {
-    result = await luminaiQuery(text, name, prompt);
+    result = await luminaiQuery(text, "Usuario", prompt);
     result = cleanResponse(result);
   } catch (e) {
     console.error("Error Luminai:", e);
@@ -35,15 +34,15 @@ module.exports = async (socket, from, msg, args, command) => {
   await socket.sendMessage(from, {
     text: result,
     contextInfo: adReply.contextInfo
-  }, { quoted: msg });
+  });
 
-  await socket.sendMessage(from, { react: { text: "✨", key: msg.key } });
+  await socket.sendMessage(from, { react: { text: "✨", key: { remoteJid: from } } });
 };
 
 async function getPrompt() {
   try {
-    const res = await fetch("https://raw.githubusercontent.com/elrebelde21/LoliBot-MD/main/src/text-chatgpt.txt");
-    return await res.text();
+    const res = await axios.get("https://raw.githubusercontent.com/elrebelde21/LoliBot-MD/main/src/text-chatgpt.txt");
+    return res.data;
   } catch {
     return "Eres un asistente inteligente";
   }
@@ -73,4 +72,4 @@ async function perplexityQuery(q, prompt) {
     params: { query: q, context: prompt }
   });
   return data.response;
-}
+                                  }
