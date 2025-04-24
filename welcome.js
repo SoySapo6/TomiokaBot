@@ -18,19 +18,13 @@ async function welcome({ socket: lite, data }) {
       try {
         avatarUrl = await lite.profilePictureUrl(userJid, "image");
       } catch {
-        // En caso no tenga foto, usa una genérica
-        avatarUrl = "https://files.catbox.moe/xr2m6u.jpg";
+        avatarUrl = "https://files.catbox.moe/xr2m6u.jpg"; // Avatar genérico si no tiene
       }
 
-      // Personalizar texto del banner
-      const text1 = "MaycolAI";
-      const text2 = "De Parte de SoyMaycol ^^";
-      const text3 = `Member ${numero}`;
+      // Crear URL con parámetros dinámicos
+      const apiURL = `http://speedhosting.cloud:5000/api/canva/bem-vindo2?titulo=MaycolAI&avatar=${encodeURIComponent(avatarUrl)}&fundo=https://files.catbox.moe/2xuxna.png&nome=${numero}&desc=Hecho%20Por%20SoyMaycol&apikey=aa18unlhqu`;
 
-      // Crear URL de Popcat con los textos personalizados
-      const popcatUrl = `https://api.popcat.xyz/welcomecard?background=https://cdn.popcat.xyz/welcome-bg.png&text1=${encodeURIComponent(text1)}&text2=${encodeURIComponent(text2)}&text3=${encodeURIComponent(text3)}&avatar=${encodeURIComponent(avatarUrl)}`;
-
-      const response = await axios.get(popcatUrl, {
+      const response = await axios.get(apiURL, {
         responseType: "arraybuffer",
         timeout: 15000,
       });
@@ -39,18 +33,20 @@ async function welcome({ socket: lite, data }) {
 
       await lite.sendMessage(from, {
         image: buffer,
-        caption: `Hola! @${numero} 💃
-Bienvenido a este Bot 🤪
+        caption: `┏━━━━━━━━━━━✦  
+┃✧  ʜᴏʟᴀ ~ @${numero}
+┃✧  ᴛᴇ ᴅᴀ ʟᴀ ʙɪᴇɴᴠᴇɴɪᴅᴀ…  
+┃✧  ᴇʟ ʙᴏᴛ ᴅᴇ ʜᴀɴᴀᴋᴏ-ᴋᴜɴ  
+┗━━━━━━━━━━━✦
 
-•Que? Que tiene este Bot? 👀
+✿ ¿𝗤𝘂𝗲́ 𝘁𝗶𝗲𝗻𝗲 𝗲𝘀𝘁𝗲 𝗕𝗼𝘁? ✿
 
-1. Un bot tematizado de Anime
+➤ ✧ ᴛᴇᴍᴀ́ᴛɪᴄᴀ ᴅᴇ ᴀɴɪᴍᴇ 〜★  
+➤ ✧ ᴄʀᴇᴀᴅᴏʀ ᴄᴏɴ ꜱᴛʏʟᴇ ✦  
+➤ ✧ ᴍɪɴɪ ᴊᴜᴇɢᴏꜱ, ᴍᴀꜱᴄᴏᴛᴀꜱ, ʏ ᴍᴀ́ꜱ!
 
-2. Un creador Guapo
-
-3. Comandos de Cuidar Mascotas y Más...
-
-ꜱᴏʏᴍᴀʏᴄᴏʟ ♪`,
+ꜱɪᴇɴᴛᴇᴛᴇ ᴄᴏ́ᴍᴏᴅ@ ʏ ᴅɪꜱꜰʀᴜᴛᴀ ~  
+☁️ ᴍᴀʏᴄᴏʟᴀɪ & ʜᴀɴᴀᴋᴏ ᴛᴇ ᴄᴜɪᴅᴀɴ ☁️`,
         mentions: [userJid],
       });
     } catch (error) {
