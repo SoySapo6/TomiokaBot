@@ -8,6 +8,6 @@ exports.comandos = [
   "music", "spotify", "info", "apk", "karkat alimentar", "karkat jugar",
   "karkat dormir", "karkat curar", "karkat bañar", "ia", "deepseek",
   "nsfw", "cai", "miaai", "beastai", "stream transmitir", "stream jugar",
-  "stream chat", "stream ganar", "stream perder", "off", "on", "pooh", "sadcat",
+  "stream chat", "stream ganar", "xex", "stream perder", "off", "on", "pooh", "sadcat",
   "oogway", "trolear"
 ];
