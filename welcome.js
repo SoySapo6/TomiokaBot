@@ -1,4 +1,6 @@
-const axios = require("axios");
+const { exec } = require("child_process");
+const fs = require("fs");
+const path = require("path");
 const { onlyNumbers } = require("./utils/functions");
 const { isActiveWelcomeGroup } = require("./database/db");
 const { errorLog } = require("./utils/terminal");
@@ -13,7 +15,6 @@ async function welcome({ socket: lite, data }) {
     try {
       const numero = onlyNumbers(userJid);
 
-      // Obtener la foto de perfil del nuevo miembro
       let avatarUrl;
       try {
         avatarUrl = await lite.profilePictureUrl(userJid, "image");
@@ -21,23 +22,23 @@ async function welcome({ socket: lite, data }) {
         avatarUrl = "https://files.catbox.moe/xr2m6u.jpg";
       }
 
-      // Construir la URL de la API
+      const imagePath = path.join(__dirname, "../stickers/welcome.jpg");
+
       const apiURL = `http://speedhosting.cloud:5000/api/canva/bem-vindo2?titulo=MaycolAI&avatar=${encodeURIComponent(avatarUrl)}&fundo=https://files.catbox.moe/2xuxna.png&nome=${numero}&desc=Hecho%20Por%20SoyMaycol&apikey=aa18unlhqu`;
 
-      // Hacer la petición a la API
-      const response = await axios.get(apiURL, {
-        responseType: "arraybuffer",
-        headers: {
-          "User-Agent": "MaycolBot/1.0"
+      // Ejecutar curl
+      exec(`curl "${apiURL}" --output "${imagePath}"`, async (error) => {
+        if (error) {
+          errorLog("No se pudo generar la imagen de bienvenida con curl.");
+          console.error(error);
+          return;
         }
-      });
 
-      const buffer = Buffer.from(response.data, "binary");
+        const buffer = fs.readFileSync(imagePath);
 
-      // Enviar imagen al grupo
-      await lite.sendMessage(from, {
-        image: buffer,
-        caption: `┏━━━━━━━━━━━✦  
+        await lite.sendMessage(from, {
+          image: buffer,
+          caption: `┏━━━━━━━━━━━✦  
 ┃✧  ʜᴏʟᴀ ~ @${numero}
 ┃✧  ᴛᴇ ᴅᴀ ʟᴀ ʙɪᴇɴᴠᴇɴɪᴅᴀ…  
 ┃✧  ᴇʟ ʙᴏᴛ ᴅᴇ ʜᴀɴᴀᴋᴏ-ᴋᴜɴ  
@@ -51,11 +52,15 @@ async function welcome({ socket: lite, data }) {
 
 ꜱɪᴇɴᴛᴇᴛᴇ ᴄᴏ́ᴍᴏᴅ@ ʏ ᴅɪꜱꜰʀᴜᴛᴀ ~  
 ☁️ ᴍᴀʏᴄᴏʟᴀɪ & ʜᴀɴᴀᴋᴏ ᴛᴇ ᴄᴜɪᴅᴀɴ ☁️`,
-        mentions: [userJid],
+          mentions: [userJid],
+        });
+
+        // Eliminar imagen para ahorrar espacio
+        fs.unlinkSync(imagePath);
       });
 
     } catch (error) {
-      errorLog("Alguien se unió al grupo y no pude enviar el mensaje de bienvenida.");
+      errorLog("Error al dar la bienvenida.");
       console.error(error.message);
     }
   }
