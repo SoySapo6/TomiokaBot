@@ -28,7 +28,6 @@ function convertirMp4aMp3(videoPath, mp3Path) {
         });
     });
 }
-const config = require("./config");
 const { duoAI } = require("./services/duoai");
 const ejecutarTermux = require("./services/termux");
 const { generarImagenConTexto } = require('./services/attp');
@@ -404,7 +403,7 @@ case "dalle":
 
     // Enviar el menú con la imagen y AdReply
     await socket.sendMessage(from, {
-        image: { url: `${config.MENUIMAGE_SoyMaycol}` }, // Enviamos la imagen con la URL correcta
+        image: { url: `${MENUIMAGE_SoyMaycol}` }, // Enviamos la imagen con la URL correcta
         caption: await menuowner(), // Llamamos a menuowner() para obtener el texto del menú
         mimetype: "image/jpeg",
         contextInfo: adReplyMenu.contextInfo // Adjuntamos el AdReply aquí
