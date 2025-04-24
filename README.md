@@ -113,7 +113,7 @@ pkg install jp2a -y && apt update -y && yes | apt upgrade && pkg install -y bash
 
 1. Instalacion Automática para CodeSpaces
 ```
-sudo apt update -y && sudo apt upgrade -y && sudo apt install -y bash wget figlet && wget -O - https://raw.githubusercontent.com/SoySapo6/MaycolAI/main/CodeSpaces.sh | bash
+sudo apt update -y && sudo apt upgrade -y && sudo apt install -y bash wget figlet && wget -O - https://raw.githubusercontent.com/SoySapo6/TomiokaBot/main/CodeSpaces.sh | bash
 ```
 
 ---
