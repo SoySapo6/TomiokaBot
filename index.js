@@ -913,6 +913,11 @@ case "ejecutarjava":
     const textsimi = args.join(' '); // Unimos los argumentos que pasaron
     await simi(socket, from, textsimi); // Llamamos a la función simi
     break;
+      case "ask":
+case "ai":
+case "xex":
+    await require("./services/ask")(socket, from, m, args, command);
+    break;
 case 'audios':
     const imagePath = './assets/images/audios.png';
 
