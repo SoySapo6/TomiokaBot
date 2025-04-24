@@ -479,37 +479,31 @@ case "qrsticker":
 
         await reply("Bueno, yo hice mi trabajo.");
         break;
- case "tiktok":
-case "tt":
+ case 'tiktok':
+case 'tt':
   if (!args[0]) {
-    await socket.sendMessage(from, { text: '📌 Envía el enlace de un video de TikTok para descargar.' });
-    break;
-  }
+    await conn.sendMessage(m.chat, { text: '📌 Envía el enlace de un video de TikTok para descargar.' }, { quoted: m });
+  } else if (!args[0].includes('tiktok.com')) {
+    await conn.sendMessage(m.chat, { text: '❌ Ese no parece un enlace válido de TikTok.' }, { quoted: m });
+  } else {
+    try {
+      await conn.sendMessage(m.chat, { text: '⏳ Descargando video de TikTok...' }, { quoted: m });
 
-  if (!args[0].includes("tiktok.com")) {
-    await socket.sendMessage(from, { text: '❌ Ese no parece un enlace válido de TikTok.' });
-    break;
-  }
+      const res = await fetch(`https://api.tiklydown.me/api/download?url=${encodeURIComponent(args[0])}`);
+      const json = await res.json();
 
-  try {
-    await socket.sendMessage(from, { text: '⏳ Descargando video de TikTok...' });
-
-    const res = await fetch(`https://api.tiklydown.me/api/download?url=${encodeURIComponent(args[0])}`);
-    const json = await res.json();
-
-    if (!json || !json.data || !json.data.video) {
-      await socket.sendMessage(from, { text: '⚠️ No se pudo descargar el video.' });
-      break;
+      if (!json?.data?.video) {
+        await conn.sendMessage(m.chat, { text: '⚠️ No se pudo descargar el video.' }, { quoted: m });
+      } else {
+        await conn.sendMessage(m.chat, {
+          video: { url: json.data.video },
+          caption: `✅ Video descargado con éxito.\n\n👤 *Autor:* ${json.data.author || 'Desconocido'}`
+        }, { quoted: m });
+      }
+    } catch (e) {
+      console.error(e);
+      await conn.sendMessage(m.chat, { text: '❌ Error al intentar descargar el video.' }, { quoted: m });
     }
-
-    await socket.sendMessage(from, {
-      video: { url: json.data.video },
-      caption: `✅ Video descargado con éxito.\n\n🎵 *Audio:* ${json.data.music || 'Desconocido'}\n👤 *Autor:* ${json.data.author || 'Desconocido'}`
-    });
-
-  } catch (e) {
-    console.error(e);
-    await socket.sendMessage(from, { text: '❌ Ocurrió un error al intentar descargar el video.' });
   }
   break;
       case "cep":
