@@ -6,7 +6,7 @@ function getAdReplyScript(title, body, thumbnailUrl, mediaUrl) {
         contextInfo: {
             externalAdReply: {
                 showAdAttribution: true,
-                title: title || `${config.OWNER_NAME} Made By SoyMaycol`,
+                title: title || `${config.BOT_NAME} Made By SoyMaycol ${config.BOT_EMOJI}`,
                 body: body || `${config.DESCRIPTION_SoyMaycol}`,
                 thumbnailUrl: thumbnailUrl || `${config.URLIMAGE_SoyMaycol}`,
                 mediaType: 2,
