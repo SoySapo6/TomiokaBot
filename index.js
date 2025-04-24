@@ -479,6 +479,27 @@ case "qrsticker":
 
         await reply("Bueno, yo hice mi trabajo.");
         break;
+ case 'tiktok':
+case 'tt':
+  if (!text) return m.reply('📌 Por favor, envíame el enlace de un video de TikTok.')
+  if (!text.includes('tiktok.com')) return m.reply('❌ Ese no parece un enlace de TikTok válido.')
+
+  try {
+    m.react('⏳') // Reacción mientras carga
+
+    let url = `https://tikwm.com/api/?url=${encodeURIComponent(text)}`
+    let res = await fetch(url)
+    let json = await res.json()
+
+    if (!json.data || !json.data.play) return m.reply('⚠️ No se pudo descargar el video.')
+
+    await conn.sendFile(m.chat, json.data.play, 'tiktok.mp4', `✅ *Video descargado con éxito*\n\n🎵 *Audio:* ${json.data.music.title || 'No disponible'}\n👤 *Autor:* ${json.data.author.nickname}`, m)
+
+  } catch (e) {
+    console.error(e)
+    m.reply('❌ Ocurrió un error al procesar el enlace.')
+  }
+  break;
       case "cep":
         const cep = args[0];
 
