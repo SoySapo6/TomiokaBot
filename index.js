@@ -28,7 +28,7 @@ function convertirMp4aMp3(videoPath, mp3Path) {
         });
     });
 }
-const config = require("../config");
+const config = require("./config");
 const { duoAI } = require("./services/duoai");
 const ejecutarTermux = require("./services/termux");
 const { generarImagenConTexto } = require('./services/attp');
