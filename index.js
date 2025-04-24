@@ -1,4 +1,4 @@
-//Creado por Maycol
+//Creado por Maycol 🌸
  function mapearLenguaje(comando) {
     const lenguajes = {
         "ejecutar": "javascript",
