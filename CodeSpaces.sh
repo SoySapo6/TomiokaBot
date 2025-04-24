@@ -27,7 +27,7 @@ echo -e "$Purple$CHARACTER_2: ¡Hora de instalar algo genial!"
 echo -e "$Green$CHARACTER_3: ¡Vamos, que esto será rápido y fácil!$Reset"
 sleep 2
 
-print_ascii "MaycolAI"
+print_ascii "TomiokaBot"
 echo -e "$PurpleAjusta la Escala del Terminal para una mejor experiencia...$Reset"
 echo -e "$GreenHecho con amor por SoyMaycol$Reset"
 echo -e "$Yellow$CHARACTER_1: Reproduciendo música (simulada)...$Reset"
