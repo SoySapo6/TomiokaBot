@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { getAdReplyScript } = require("../lib/adreply");
+const { getAdReplyScript } = require("./adreply");
 const config = require("../config");
 
 module.exports = async (socket, from, msg, args, command) => {
