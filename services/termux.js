@@ -21,9 +21,9 @@ async function ejecutarTermux(socket, from, comando) {
                 socket.sendMessage(from, { text: `⚠️ *Salida de error:* ${stderr}` });
                 return;
             }
-            socket.sendMessage(from, { text: `*Salida:*
+            socket.sendMessage(from, { text: `*💻 Salida 💻*
             ${stdout}
-            > Desarrollado por ${config.OWNER_NAME} ` });
+> Desarrollado por ${config.OWNER_NAME}` });
         });
     } catch (error) {
         socket.sendMessage(from, { text: "❌ Error al ejecutar el comando." });
