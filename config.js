@@ -73,3 +73,5 @@ exports.CHANNEL_SoyMaycol = "https://whatsapp.com/channel/0029VayXJte65yD6LQGiRB
 
 //Tu pagina web o Relacionada contigo
 exports.WEB_SoyMaycol = "https://soymaycol.vercel.app/";
+
+exports.MENUIMAGE_SoyMaycol = "https://files.catbox.moe/pj18me.jpg"
