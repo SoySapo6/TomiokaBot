@@ -287,6 +287,9 @@ async function runLite({ socket, data }) {
         await reply("Guau Guau 🐶");
     await require("./services/dog")(socket, from);
     break;
+     case "gu":
+     await reply("Guau Guau 🌸");
+      break;
       case "power":
 case "apagar":
 case "shutdown":
