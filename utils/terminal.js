@@ -79,18 +79,23 @@ function tutorLog(message, color = "magenta") {
 }
 
 function bannerLog() {
+  try {
+    execSync("clear"); // Limpia la consola antes de mostrar el banner
+  } catch (err) {
+    console.error("No se pudo limpiar la consola:", err.message);
+  }
+
   console.log(`\x1b[${textColor.cyan}m__  __                       _    _    ___\x1b[0m`);
   console.log(`\x1b[${textColor.cyan}m|  \\/  | __ _ _   _  ___ ___ | |  / \\  |_ _|\x1b[0m`);
   console.log(`\x1b[${textColor.cyan}m| |\\/| |/ _\` | | | |/ __/ _ \\| | / _ \\  | |\x1b[0m`);
   console.log(`\x1b[${textColor.cyan}m| |  | | (_| | |_| | (_| (_) | |/ ___ \\ | |\x1b[0m`);
   console.log(`\x1b[${textColor.cyan}m|_|  |_|\\__,_|\\__, |\\___\\___/|_/_/   \\_\\___|\x1b[0m`);
-  console.log(`\x1b[${textColor.cyan}m              |___/\x1b[0m`);
-  console.log(``);
-  console.log(`\x1b[${textColor.cyan}m👥 Registrados: ${getProfileCount()}`);
-  console.log(`\x1b[${textColor.cyan}m🌐 Creador: SoyMaycol`);
+  console.log(`\x1b[${textColor.cyan}m              |___/\x1b[0m\n`);
+
+  console.log(`\x1b[${textColor.cyan}m👥 Registrados: ${getProfileCount()}\x1b[0m`);
+  console.log(`\x1b[${textColor.cyan}m🌐 Creador: SoyMaycol\x1b[0m`);
   console.log(`\x1b[${textColor.cyan}m🤖 Vercion: \x1b[0m${version}\n`);
 
-  // Mostrar imagen ASCII con jp2a
   try {
     const asciiImage = execSync("jp2a --color --width=40 HanakoTerminal.png", { encoding: "utf-8" });
     console.log(asciiImage);
