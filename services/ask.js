@@ -1,5 +1,4 @@
 const axios = require('axios');
-const fetch = require('node-fetch');
 const { getAdReplyScript } = require("../lib/adreply");
 const config = require("../config");
 
